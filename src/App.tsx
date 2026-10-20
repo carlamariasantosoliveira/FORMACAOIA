@@ -19,10 +19,41 @@ import { SimuladoresQuizzesPage } from './components/Pages/SimuladoresQuizzesPag
 import { DesafioFinalPage } from './components/Pages/DesafioFinalPage';
 import { ReferenciasPage } from './components/Pages/ReferenciasPage';
 
+const VALID_PAGES: PageId[] = [
+  'home',
+  'ia-generativa',
+  'como-funcionam',
+  'tipos-modelos',
+  'prompts',
+  'tecnicas',
+  'exemplos-disciplina',
+  'atividades-sala',
+  'magicschool',
+  'simuladores-quizzes',
+  'desafio-final',
+  'ferramentas-referencias',
+];
+
+const getPageFromHash = (): PageId => {
+  if (typeof window === 'undefined') return 'home';
+  const rawHash = window.location.hash.replace(/^#\/?/, '').trim();
+  return (VALID_PAGES.includes(rawHash as PageId) ? rawHash : 'home') as PageId;
+};
+
 export default function App() {
-  const [currentPage, setCurrentPage] = useState<PageId>('home');
+  const [currentPage, setCurrentPage] = useState<PageId>(getPageFromHash);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+
+  // Sync hash changes (browser back/forward button)
+  useEffect(() => {
+    const handleHashChange = () => {
+      const page = getPageFromHash();
+      setCurrentPage(page);
+    };
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, []);
 
   // Scroll to top whenever currentPage changes
   useEffect(() => {
@@ -43,6 +74,13 @@ export default function App() {
 
   const handleSelectPage = (pageId: PageId) => {
     setCurrentPage(pageId);
+    if (pageId === 'home') {
+      if (window.location.hash) {
+        history.pushState(null, '', window.location.pathname + window.location.search);
+      }
+    } else {
+      window.location.hash = pageId;
+    }
     setIsMobileMenuOpen(false);
   };
 

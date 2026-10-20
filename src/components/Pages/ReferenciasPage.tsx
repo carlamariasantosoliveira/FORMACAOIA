@@ -4,12 +4,10 @@ import {
   Search,
   Copy,
   Check,
-  Download,
   BookOpen,
-  ExternalLink,
   ShieldCheck,
   CheckCircle2,
-  Filter,
+  GraduationCap,
 } from 'lucide-react';
 import {
   BIBLIOGRAPHIC_REFERENCES,
@@ -42,70 +40,71 @@ export const ReferenciasPage: React.FC = () => {
   };
 
   return (
-    <div className="space-y-8 pb-12">
-      {/* Title bar */}
+    <div className="space-y-8 pb-12 font-sans">
+      {/* Title bar with signature blue vertical line */}
       <div className="flex items-center gap-3">
-        <span className="w-1.5 h-8 bg-blue-600 rounded-full inline-block"></span>
+        <span className="w-1.5 h-8 bg-[#1E70EB] rounded-full inline-block"></span>
         <div>
-          <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-[#0C1E38] tracking-tight">
             11. Ferramentas Citadas e Referências Bibliográficas
           </h1>
           <p className="text-xs text-slate-500 font-medium mt-0.5">
-            Corpus Científico Integral, Ferramentas Referenciadas e Ficha Técnica
+            Corpus Científico Integral, Ferramentas Referenciadas e Ficha Técnica do Módulo
           </p>
         </div>
       </div>
 
-      {/* Official Download Banner for Original PDF */}
-      <div className="bg-linear-to-r from-blue-900 to-indigo-900 text-white rounded-2xl p-6 shadow-md flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-        <div className="space-y-1">
-          <span className="text-[11px] font-semibold text-blue-200 uppercase tracking-wider block">
-            Documento de Suporte Oficial
-          </span>
+      {/* Course Integration Banner (No PDF download/viewer to keep study 100% on-platform) */}
+      <div className="bg-linear-to-r from-[#0C1E3C] via-[#0E2448] to-[#12315C] text-white rounded-3xl p-6 sm:p-7 shadow-xs border border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div className="space-y-1.5">
+          <div className="flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-emerald-400"></span>
+            <span className="text-[11px] font-bold text-blue-300 uppercase tracking-wider">
+              Plataforma Oficial de Estudo do Módulo 2
+            </span>
+          </div>
           <h2 className="text-lg font-bold text-white">
-            Transcrição Pedagógica Original (PDF de 9 Páginas)
+            Conteúdo Pedagógico Integralmente Integrado
           </h2>
-          <p className="text-xs text-blue-100/90 leading-relaxed max-w-xl">
-            Descarregue o documento de suporte do curso criado por Carla Oliveira para consulta offline ou arquivo.
+          <p className="text-xs text-blue-100/90 leading-relaxed max-w-2xl">
+            Toda a matéria necessária para o seu estudo — definições, ciclo de funcionamento, 8 técnicas de prompts, exemplos por disciplina, 4 atividades práticas e geradores MagicSchool — está disponível diretamente nas páginas interativas deste curso, dispensando ficheiros externos.
           </p>
         </div>
 
-        <a
-          href="/assets/aistudio/MODULO2_791c8103.pdf"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-blue-500 hover:bg-blue-400 text-white font-semibold text-xs shadow-md transition-colors shrink-0"
-        >
-          <Download className="w-4 h-4" />
-          <span>Descarregar PDF Oficial</span>
-        </a>
+        <div className="hidden sm:flex items-center gap-2 bg-white/10 px-4 py-2.5 rounded-2xl border border-white/10 shrink-0 text-xs font-semibold text-blue-100">
+          <GraduationCap className="w-5 h-5 text-blue-300" />
+          <span>Formação a Distância</span>
+        </div>
       </div>
 
       {/* Section 1: Ferramentas Citadas */}
-      <div className="bg-white rounded-2xl p-6 border border-slate-200 shadow-xs space-y-5">
+      <div className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-100 shadow-2xs space-y-5">
         <div className="border-b border-slate-100 pb-3">
-          <span className="text-xs font-semibold text-blue-600 uppercase tracking-wider block mb-0.5">
+          <span className="text-xs font-semibold text-[#1E70EB] uppercase tracking-wider block mb-0.5">
             Módulo 2 (Página 8)
           </span>
           <h2 className="text-lg font-bold text-slate-900">
             Ferramentas de IA Generativa Referenciadas
           </h2>
+          <p className="text-xs text-slate-500 mt-0.5">
+            Modelos de linguagem, chatbots e plataformas educativas analisadas ao longo do curso.
+          </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {LLM_TOOLS_LIST.map((tool, idx) => (
             <div
               key={idx}
-              className="p-4 rounded-xl border border-slate-200 hover:border-blue-300 bg-slate-50/50 hover:bg-white transition-all shadow-2xs space-y-2 flex flex-col justify-between"
+              className="p-5 rounded-2xl border border-slate-200/80 hover:border-blue-300 bg-[#F8FAFC] hover:bg-white transition-all shadow-2xs space-y-2 flex flex-col justify-between"
             >
               <div>
-                <div className="flex items-center justify-between gap-2 mb-1">
+                <div className="flex items-center justify-between gap-2 mb-1.5">
                   <h3 className="text-sm font-bold text-slate-900">{tool.name}</h3>
-                  <span className="text-[10px] font-semibold text-slate-500 bg-slate-200/70 px-2 py-0.5 rounded-sm">
+                  <span className="text-[10px] font-semibold text-slate-600 bg-slate-200/70 px-2 py-0.5 rounded-md">
                     {tool.badge}
                   </span>
                 </div>
-                <span className="text-[11px] font-medium text-blue-700 block mb-1">
+                <span className="text-[11px] font-semibold text-[#1E70EB] block mb-1">
                   {tool.role}
                 </span>
                 <p className="text-xs text-slate-600 leading-relaxed">
@@ -118,17 +117,17 @@ export const ReferenciasPage: React.FC = () => {
       </div>
 
       {/* Section 2: All 19 Bibliographic References */}
-      <div className="bg-white rounded-2xl p-6 border border-slate-200 shadow-xs space-y-5">
+      <div className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-100 shadow-2xs space-y-5">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-100 pb-4">
           <div>
-            <span className="text-xs font-semibold text-blue-600 uppercase tracking-wider block mb-0.5">
+            <span className="text-xs font-semibold text-[#1E70EB] uppercase tracking-wider block mb-0.5">
               Literatura Científica (Página 9)
             </span>
             <h2 className="text-lg font-bold text-slate-900">
               Referências Bibliográficas do Módulo 2
             </h2>
             <p className="text-xs text-slate-500 mt-0.5">
-              Todas as 19 obras citadas no documento original, com formatação bibliográfica rigorosa.
+              Todas as 19 obras citadas no documento original de formação, com formatação bibliográfica rigorosa.
             </p>
           </div>
 
@@ -149,9 +148,9 @@ export const ReferenciasPage: React.FC = () => {
         <div className="flex flex-wrap gap-1.5 pt-1">
           <button
             onClick={() => setCategoryFilter('all')}
-            className={`text-xs px-3 py-1.5 rounded-lg font-medium transition-all ${
+            className={`text-xs px-3.5 py-1.5 rounded-xl font-medium transition-all cursor-pointer ${
               categoryFilter === 'all'
-                ? 'bg-blue-600 text-white shadow-2xs'
+                ? 'bg-[#1E70EB] text-white shadow-2xs'
                 : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
             }`}
           >
@@ -159,9 +158,9 @@ export const ReferenciasPage: React.FC = () => {
           </button>
           <button
             onClick={() => setCategoryFilter('prompts')}
-            className={`text-xs px-3 py-1.5 rounded-lg font-medium transition-all ${
+            className={`text-xs px-3.5 py-1.5 rounded-xl font-medium transition-all cursor-pointer ${
               categoryFilter === 'prompts'
-                ? 'bg-blue-600 text-white shadow-2xs'
+                ? 'bg-[#1E70EB] text-white shadow-2xs'
                 : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
             }`}
           >
@@ -169,9 +168,9 @@ export const ReferenciasPage: React.FC = () => {
           </button>
           <button
             onClick={() => setCategoryFilter('etica')}
-            className={`text-xs px-3 py-1.5 rounded-lg font-medium transition-all ${
+            className={`text-xs px-3.5 py-1.5 rounded-xl font-medium transition-all cursor-pointer ${
               categoryFilter === 'etica'
-                ? 'bg-blue-600 text-white shadow-2xs'
+                ? 'bg-[#1E70EB] text-white shadow-2xs'
                 : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
             }`}
           >
@@ -179,19 +178,19 @@ export const ReferenciasPage: React.FC = () => {
           </button>
           <button
             onClick={() => setCategoryFilter('relatorios')}
-            className={`text-xs px-3 py-1.5 rounded-lg font-medium transition-all ${
+            className={`text-xs px-3.5 py-1.5 rounded-xl font-medium transition-all cursor-pointer ${
               categoryFilter === 'relatorios'
-                ? 'bg-blue-600 text-white shadow-2xs'
+                ? 'bg-[#1E70EB] text-white shadow-2xs'
                 : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
             }`}
           >
-            UNESCO & OCDE
+            UNESCO &amp; OCDE
           </button>
           <button
             onClick={() => setCategoryFilter('ia-geral')}
-            className={`text-xs px-3 py-1.5 rounded-lg font-medium transition-all ${
+            className={`text-xs px-3.5 py-1.5 rounded-xl font-medium transition-all cursor-pointer ${
               categoryFilter === 'ia-geral'
-                ? 'bg-blue-600 text-white shadow-2xs'
+                ? 'bg-[#1E70EB] text-white shadow-2xs'
                 : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
             }`}
           >
@@ -206,7 +205,7 @@ export const ReferenciasPage: React.FC = () => {
             return (
               <div
                 key={ref.id}
-                className="p-4 rounded-xl border border-slate-200/90 bg-white hover:bg-slate-50/70 transition-all shadow-2xs flex flex-col sm:flex-row sm:items-start justify-between gap-3"
+                className="p-4 rounded-2xl border border-slate-200/80 bg-white hover:bg-slate-50/70 transition-all shadow-2xs flex flex-col sm:flex-row sm:items-start justify-between gap-3"
               >
                 <div className="space-y-1">
                   <div className="flex items-center gap-2">
@@ -227,7 +226,7 @@ export const ReferenciasPage: React.FC = () => {
 
                 <button
                   onClick={() => handleCopyCitation(ref.id, formattedAPA)}
-                  className="self-start inline-flex items-center gap-1.5 text-[11px] font-medium text-slate-600 hover:text-blue-700 bg-slate-50 hover:bg-blue-50 border border-slate-200 px-2.5 py-1 rounded-md shrink-0 transition-colors"
+                  className="self-start inline-flex items-center gap-1.5 text-[11px] font-medium text-slate-600 hover:text-[#1E70EB] bg-slate-50 hover:bg-blue-50 border border-slate-200 px-2.5 py-1 rounded-lg shrink-0 transition-colors cursor-pointer"
                   title="Copiar citação em estilo APA"
                 >
                   {copiedId === ref.id ? (
@@ -248,16 +247,16 @@ export const ReferenciasPage: React.FC = () => {
         </div>
       </div>
 
-      {/* Section 3: Ficha Técnica e Créditos Oficiais */}
-      <div className="bg-slate-50/80 rounded-2xl p-6 border border-slate-200/80 text-xs text-slate-700 space-y-2">
-        <h3 className="text-xs font-bold uppercase tracking-wider text-slate-900">
-          Ficha Técnica e Créditos Oficiais:
+      {/* Section 3: Ficha Técnica e Créditos Oficiais verbatim from page 9 */}
+      <div className="bg-[#EFF6FF] rounded-3xl p-6 sm:p-7 border border-blue-100 text-xs text-slate-700 space-y-2">
+        <h3 className="text-xs font-bold uppercase tracking-wider text-[#1D4ED8]">
+          Ficha Técnica e Créditos:
         </h3>
         <p className="leading-relaxed">
           <strong>Conteúdo original:</strong> Carla Oliveira (criado em 26 de janeiro de 2026).
         </p>
         <p className="leading-relaxed">
-          <strong>Enquadramento Institucional:</strong> Documento estruturado para o Curso de Inteligência Artificial na Educação. Formato web interativo autónomo concebido para capacitação docente à distância.
+          <strong>Âmbito e Enquadramento:</strong> Documento estruturado para o <em>Curso de Inteligência Artificial na Educação</em>. Formato digital autónomo concebido para a formação contínua de professores a distância.
         </p>
       </div>
     </div>

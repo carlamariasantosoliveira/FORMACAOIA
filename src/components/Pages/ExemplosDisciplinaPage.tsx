@@ -3,9 +3,6 @@ import {
   BookOpen,
   Filter,
   Sparkles,
-  Layers,
-  Video,
-  Megaphone,
 } from 'lucide-react';
 import { DISCIPLINE_PROMPTS } from '../../data/courseData';
 import { PromptCard } from '../Common/PromptCard';
@@ -26,28 +23,28 @@ export const ExemplosDisciplinaPage: React.FC<ExemplosDisciplinaPageProps> = ({
   });
 
   return (
-    <div className="space-y-8 pb-12">
+    <div className="space-y-8 pb-12 font-sans">
       {/* Title bar */}
       <div className="flex items-center gap-3">
-        <span className="w-1.5 h-8 bg-blue-600 rounded-full inline-block"></span>
+        <span className="w-1.5 h-8 bg-[#1E70EB] rounded-full inline-block"></span>
         <div>
-          <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
-            6. Exemplos Práticos de Bons Prompts por Disciplina e Área
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-[#0C1E38] tracking-tight">
+            Exemplos Práticos de Bons Prompts por Disciplina e Área
           </h1>
           <p className="text-xs text-slate-500 font-medium mt-0.5">
-            Modelos de Formulação Rigorosa Transcritos na Íntegra do Módulo Oficial
+            Modelos de Formulação Rigorosa Transcritos na Íntegra do Módulo Oficial (Páginas 5 e 6)
           </p>
         </div>
       </div>
 
       {/* Filter Tabs */}
-      <div className="flex flex-wrap items-center justify-between gap-4 bg-white p-3.5 rounded-2xl border border-slate-200 shadow-2xs">
+      <div className="flex flex-wrap items-center justify-between gap-4 bg-white p-3 sm:p-4 rounded-3xl border border-slate-100 shadow-2xs">
         <div className="flex flex-wrap gap-1.5">
           <button
             onClick={() => setFilter('all')}
-            className={`text-xs px-3.5 py-1.5 rounded-lg font-medium transition-all ${
+            className={`text-xs px-3.5 py-1.5 rounded-xl font-medium transition-all cursor-pointer ${
               filter === 'all'
-                ? 'bg-blue-600 text-white shadow-2xs'
+                ? 'bg-[#1E70EB] text-white shadow-2xs font-semibold'
                 : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
             }`}
           >
@@ -55,9 +52,9 @@ export const ExemplosDisciplinaPage: React.FC<ExemplosDisciplinaPageProps> = ({
           </button>
           <button
             onClick={() => setFilter('curriculo')}
-            className={`text-xs px-3.5 py-1.5 rounded-lg font-medium transition-all ${
+            className={`text-xs px-3.5 py-1.5 rounded-xl font-medium transition-all cursor-pointer ${
               filter === 'curriculo'
-                ? 'bg-blue-600 text-white shadow-2xs'
+                ? 'bg-[#1E70EB] text-white shadow-2xs font-semibold'
                 : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
             }`}
           >
@@ -65,19 +62,19 @@ export const ExemplosDisciplinaPage: React.FC<ExemplosDisciplinaPageProps> = ({
           </button>
           <button
             onClick={() => setFilter('multimedia')}
-            className={`text-xs px-3.5 py-1.5 rounded-lg font-medium transition-all ${
+            className={`text-xs px-3.5 py-1.5 rounded-xl font-medium transition-all cursor-pointer ${
               filter === 'multimedia'
-                ? 'bg-blue-600 text-white shadow-2xs'
+                ? 'bg-[#1E70EB] text-white shadow-2xs font-semibold'
                 : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
             }`}
           >
-            Multimédia & Imagem (3)
+            Multimédia &amp; Imagem (3)
           </button>
           <button
             onClick={() => setFilter('comunicacao')}
-            className={`text-xs px-3.5 py-1.5 rounded-lg font-medium transition-all ${
+            className={`text-xs px-3.5 py-1.5 rounded-xl font-medium transition-all cursor-pointer ${
               filter === 'comunicacao'
-                ? 'bg-blue-600 text-white shadow-2xs'
+                ? 'bg-[#1E70EB] text-white shadow-2xs font-semibold'
                 : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
             }`}
           >
@@ -102,7 +99,7 @@ export const ExemplosDisciplinaPage: React.FC<ExemplosDisciplinaPageProps> = ({
             keyAspects={item.keyAspects}
             onUseInSimulator={() => {
               if (onNavigate) {
-                onNavigate('simuladores-quizzes');
+                onNavigate('prompts');
               }
             }}
           />

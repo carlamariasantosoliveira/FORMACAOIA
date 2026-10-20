@@ -7,6 +7,7 @@ import {
   Copy,
   Check,
   Sparkles,
+  Info,
 } from 'lucide-react';
 
 export const PromptsPage: React.FC = () => {
@@ -47,7 +48,7 @@ export const PromptsPage: React.FC = () => {
         <div className="flex items-center gap-3">
           <span className="w-1.5 h-8 bg-[#1E70EB] rounded-full inline-block"></span>
           <h1 className="text-2xl sm:text-3xl font-extrabold text-[#0C1E38] tracking-tight">
-            O que é um Prompt?
+            3. Prompts e Engenharia de Prompts
           </h1>
         </div>
 
@@ -89,7 +90,7 @@ export const PromptsPage: React.FC = () => {
               <AlertCircle className="w-3.5 h-3.5" />
             </div>
             <p className="text-slate-800">
-              <strong className="text-slate-900 font-bold">Restrições:</strong> O que deve evitar? (ex.: &ldquo;Não uses termos técnicos&rdquo;).
+              <strong className="text-slate-900 font-bold">Restrições:</strong> O que evitar? (ex.: &ldquo;Não uses termos técnicos&rdquo;).
             </p>
           </div>
 
@@ -99,9 +100,15 @@ export const PromptsPage: React.FC = () => {
               <Layout className="w-3.5 h-3.5" />
             </div>
             <p className="text-slate-800">
-              <strong className="text-slate-900 font-bold">Formato:</strong> Como apresentar a resposta? (ex.: &ldquo;Em tabela&rdquo;).
+              <strong className="text-slate-900 font-bold">Formato:</strong> Como apresentar a resposta? (ex.: &ldquo;Em tabela&rdquo;, &ldquo;Em tópicos&rdquo;).
             </p>
           </div>
+        </div>
+
+        {/* Verbatim Note from Page 3 */}
+        <div className="pt-2 border-t border-blue-200/60 flex items-center gap-2 text-xs text-[#1D4ED8] font-semibold">
+          <Info className="w-4 h-4 shrink-0 text-[#1E70EB]" />
+          <span>Nota: A qualidade do prompt influencia significativamente a qualidade do resultado obtido.</span>
         </div>
       </div>
 

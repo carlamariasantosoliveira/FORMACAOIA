@@ -605,7 +605,7 @@ export const QUIZ_QUESTIONS: QuizQuestion[] = [
     conceptCovered: 'Conceito de IA Generativa',
   },
   {
-    id: 2,
+    id: 3,
     question: 'Na analogia do processo de treino apresentada no Módulo, a que corresponde a aprendizagem de padrões?',
     options: [
       'A decorar integralmente cada receita do livro de culinária para a repetir sem erros.',
@@ -619,7 +619,7 @@ export const QUIZ_QUESTIONS: QuizQuestion[] = [
     conceptCovered: 'Aprendizagem de Padrões (Ciclo de Funcionamento)',
   },
   {
-    id: 3,
+    id: 4,
     question: 'Qual é a «Limitação Fundamental» dos modelos generativos assinalada como MUITO IMPORTANTE?',
     options: [
       'A incapacidade de gerar textos com mais de duas frases.',
@@ -633,7 +633,7 @@ export const QUIZ_QUESTIONS: QuizQuestion[] = [
     conceptCovered: 'Limitação Fundamental dos Modelos Generativos',
   },
   {
-    id: 4,
+    id: 5,
     question: 'Como operam os Modelos de Linguagem (LLMs) ao processar e predizer linguagem natural?',
     options: [
       'Fatiam o texto em tokens e usam o mecanismo de Atenção (Transformers) para predizer o próximo token mais provável.',
@@ -647,7 +647,7 @@ export const QUIZ_QUESTIONS: QuizQuestion[] = [
     conceptCovered: 'Funcionamento dos LLMs',
   },
   {
-    id: 5,
+    id: 6,
     question: 'Quais são os quatro elementos estruturais essenciais na formulação de um prompt eficaz?',
     options: [
       'Introdução, Desenvolvimento, Conclusão e Bibliografia.',
@@ -661,7 +661,7 @@ export const QUIZ_QUESTIONS: QuizQuestion[] = [
     conceptCovered: 'Elementos Principais de um Prompt',
   },
   {
-    id: 6,
+    id: 7,
     question: 'Em que consiste a técnica de "Few-Shot Prompting" na elaboração de instruções pedagógicas?',
     options: [
       'Em limitar o prompt a menos de cinco palavras no total.',
@@ -675,7 +675,7 @@ export const QUIZ_QUESTIONS: QuizQuestion[] = [
     conceptCovered: 'Técnicas de Formulação de Prompts',
   },
   {
-    id: 7,
+    id: 8,
     question: 'Na Atividade 1 ("O Prompt de Ouro"), quais são os três eixos em que o aluno deve refinar o texto?',
     options: [
       'Ortografia, Margens e Cor da fonte.',
@@ -689,7 +689,7 @@ export const QUIZ_QUESTIONS: QuizQuestion[] = [
     conceptCovered: 'Atividades Práticas em Sala de Aula',
   },
   {
-    id: 8,
+    id: 9,
     question: 'Qual é a base documental específica do chatbot "IA - Questões Éticas" do MagicSchool.ai?',
     options: [
       'A legislação comercial geral dos Estados Unidos da América.',

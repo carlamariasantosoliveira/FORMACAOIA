@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="pt">
+  <head>
+    <meta charset="utf-8" />
+    <title>IA na Educação - A redirecionar...</title>
+    <script>
+      // Single Page Application redirect for GitHub Pages
+      // Redirects 404 paths to index.html with hash routing
+      const pathname = window.location.pathname;
+      const repoSegments = pathname.split('/').filter(Boolean);
+      // Determine if there is a repository subpath
+      const repoBase = repoSegments.length > 0 ? '/' + repoSegments[0] + '/' : '/';
+      window.location.replace(repoBase);
+    </script>
+  </head>
+  <body>
+    <p>A redirecionar para a página principal...</p>
+  </body>
+</html>

@@ -7,7 +7,6 @@ import {
   Layers,
   Sparkles,
   CheckCircle2,
-  Cpu,
   ArrowRight,
   BookOpen,
 } from 'lucide-react';
@@ -41,7 +40,7 @@ export const TiposModelosPage: React.FC<TiposModelosPageProps> = ({ onNavigate }
         'Apoio à escrita e revisão de textos.',
       ],
       classroomExample:
-        '“Age como professor de História. Cria uma versão adaptada da Revolução Industrial em 200 palavras para alunos com vocabulário em desenvolvimento.”',
+        '“Age como professor de Português do 9.º ano. Explica o que é um texto argumentativo para alunos do 9.º ano. Organiza a explicação em tópicos curtos, utilizando linguagem clara e acessível...”',
     },
     {
       id: 'imagem',
@@ -59,7 +58,7 @@ export const TiposModelosPage: React.FC<TiposModelosPageProps> = ({ onNavigate }
         'Apoio à explicação visual de conteúdos.',
       ],
       classroomExample:
-        '“Age como ilustrador educativo. Descreve uma imagem que represente o ciclo da água, destinada a alunos do 5.º ano...”',
+        '“Age como ilustrador educativo. Descreve uma imagem que represente o ciclo da água, destinada a alunos do 5.º ano. Indica os elementos visuais principais, as cores sugeridas e os rótulos a incluir...”',
     },
     {
       id: 'audio',
@@ -77,7 +76,7 @@ export const TiposModelosPage: React.FC<TiposModelosPageProps> = ({ onNavigate }
         'Apoio a atividades de expressão oral.',
       ],
       classroomExample:
-        'Criação de podcasts educativos para apoio a alunos com necessidades de acessibilidade na leitura.',
+        'Criação de podcasts educativos para apoio a alunos com necessidades de acessibilidade na leitura e treino de pronúncia.',
     },
     {
       id: 'video',
@@ -95,7 +94,7 @@ export const TiposModelosPage: React.FC<TiposModelosPageProps> = ({ onNavigate }
         'Projetos multimédia com alunos.',
       ],
       classroomExample:
-        'Geração de pequenas animações históricas ou diálogos entre avatares educativos sobre cidadania digital.',
+        '“Age como professor de TIC. Cria um diálogo curto entre dois avatares sobre o uso responsável das redes sociais, destinado a alunos do 7.º ano...”',
     },
     {
       id: 'multimodal',
@@ -115,23 +114,23 @@ export const TiposModelosPage: React.FC<TiposModelosPageProps> = ({ onNavigate }
         'Desenvolvimento de atividades mais interativas.',
       ],
       classroomExample:
-        'Submeter a fotografia de um esquema do aparelho digestivo e pedir à IA que elabore perguntas formativas baseadas na imagem.',
+        'Submeter a fotografia de um esquema do ciclo da água e pedir à IA para formular questões formativas e detetar potenciais conceções erradas dos alunos.',
     },
   ];
 
   const current = modelTypes[selectedType];
 
   return (
-    <div className="space-y-8 pb-12">
-      {/* Title bar */}
+    <div className="space-y-8 pb-12 font-sans">
+      {/* Title bar with signature blue vertical line */}
       <div className="flex items-center gap-3">
-        <span className="w-1.5 h-8 bg-blue-600 rounded-full inline-block"></span>
+        <span className="w-1.5 h-8 bg-[#1E70EB] rounded-full inline-block"></span>
         <div>
-          <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
-            3. Tipos de Modelos Generativos e Aplicações Educativas
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-[#0C1E38] tracking-tight">
+            2. Tipos de Modelos Generativos e Aplicações Educativas
           </h1>
           <p className="text-xs text-slate-500 font-medium mt-0.5">
-            Texto (LLMs), Imagem, Áudio/Voz, Vídeo e Modelos Multimodais
+            Texto (LLMs), Imagem, Áudio/Voz, Vídeo e Modelos Multimodais (Páginas 2 e 3)
           </p>
         </div>
       </div>
@@ -145,9 +144,9 @@ export const TiposModelosPage: React.FC<TiposModelosPageProps> = ({ onNavigate }
             <button
               key={t.id}
               onClick={() => setSelectedType(idx)}
-              className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-semibold transition-all ${
+              className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
                 isSelected
-                  ? 'bg-white text-blue-900 shadow-xs ring-1 ring-slate-200'
+                  ? 'bg-white text-[#1D4ED8] shadow-xs ring-1 ring-slate-200'
                   : 'text-slate-600 hover:text-slate-900 hover:bg-white/60'
               }`}
             >
@@ -159,85 +158,85 @@ export const TiposModelosPage: React.FC<TiposModelosPageProps> = ({ onNavigate }
       </div>
 
       {/* Selected Model Detail Card */}
-      <div className="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden">
+      <div className="bg-white rounded-3xl border border-slate-100 shadow-2xs overflow-hidden">
         <div className="p-6 sm:p-8 space-y-6">
-          <div className="flex items-center gap-3 border-b border-slate-100 pb-4">
-            <div className="w-12 h-12 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center shrink-0">
+          <div className="flex items-center gap-3.5 border-b border-slate-100 pb-4">
+            <div className="w-12 h-12 rounded-2xl bg-blue-50 text-[#1E70EB] flex items-center justify-center shrink-0">
               <current.icon className="w-6 h-6" />
             </div>
             <div>
-              <span className="text-xs font-semibold text-blue-600 uppercase tracking-wider">
+              <span className="text-xs font-bold text-[#1E70EB] uppercase tracking-wider block">
                 Categoria do Módulo 2
               </span>
-              <h2 className="text-xl font-bold text-slate-900">{current.fullTitle}</h2>
+              <h2 className="text-xl font-extrabold text-[#0C1E38]">{current.fullTitle}</h2>
             </div>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
             {/* What they do & How they work (7 cols) */}
             <div className="lg:col-span-7 space-y-4">
-              <div className="bg-slate-50/80 p-4 rounded-xl border border-slate-200/80 space-y-1">
+              <div className="bg-[#F8FAFC] p-4 sm:p-5 rounded-2xl border border-slate-200/80 space-y-1">
                 <span className="text-xs font-bold uppercase tracking-wider text-slate-800">
                   O Que Fazem:
                 </span>
-                <p className="text-sm text-slate-800 leading-relaxed font-medium">
+                <p className="text-sm text-slate-800 leading-relaxed font-normal">
                   {current.whatTheyDo}
                 </p>
               </div>
 
-              <div className="bg-white p-5 rounded-xl border border-slate-200 space-y-2">
+              <div className="bg-white p-5 rounded-2xl border border-slate-200 space-y-2">
                 <span className="text-xs font-bold uppercase tracking-wider text-slate-800 block">
                   Como Funcionam:
                 </span>
                 <ul className="space-y-2 text-xs sm:text-sm text-slate-700 leading-relaxed">
                   {current.howTheyWork.map((hw, i) => (
                     <li key={i} className="flex items-start gap-2">
-                      <span className="w-1.5 h-1.5 rounded-full bg-blue-600 mt-2 shrink-0"></span>
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#1E70EB] mt-2 shrink-0"></span>
                       <span>{hw}</span>
                     </li>
                   ))}
                 </ul>
               </div>
 
-              <div className="bg-blue-50/60 p-4 rounded-xl border border-blue-200/60 text-xs space-y-1">
-                <span className="font-bold text-blue-900 block">
+              <div className="bg-[#EFF6FF] p-4 sm:p-5 rounded-2xl border border-blue-100 text-xs space-y-1.5">
+                <span className="font-bold text-[#1D4ED8] block">
                   Exemplo de Aplicação Prática:
                 </span>
-                <p className="text-blue-950 font-mono text-[11px] leading-relaxed bg-white/80 p-2.5 rounded-lg border border-blue-200/50">
+                <p className="text-blue-950 font-mono text-xs leading-relaxed bg-white/90 p-3 rounded-xl border border-blue-200/50">
                   {current.classroomExample}
                 </p>
               </div>
             </div>
 
             {/* Educational Applications (5 cols) */}
-            <div className="lg:col-span-5 bg-linear-to-br from-slate-50 to-blue-50/40 p-5 rounded-xl border border-slate-200 space-y-3 flex flex-col justify-between">
+            <div className="lg:col-span-5 bg-linear-to-br from-[#F8FAFC] to-blue-50/40 p-5 sm:p-6 rounded-3xl border border-slate-200 space-y-4 flex flex-col justify-between">
               <div className="space-y-3">
                 <div className="flex items-center gap-2">
-                  <BookOpen className="w-4 h-4 text-blue-600" />
-                  <h3 className="text-xs font-bold uppercase tracking-wider text-blue-900">
-                    Aplicações Educativas (PDF Oficial)
+                  <BookOpen className="w-4 h-4 text-[#1E70EB]" />
+                  <h3 className="text-xs font-bold uppercase tracking-wider text-[#1D4ED8]">
+                    Aplicações Educativas
                   </h3>
                 </div>
 
                 <ul className="space-y-2.5 text-xs text-slate-700">
                   {current.educationalApps.map((app, idx) => (
-                    <li key={idx} className="flex items-start gap-2.5 bg-white p-2.5 rounded-lg border border-slate-200/80 shadow-2xs">
-                      <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                    <li key={idx} className="flex items-start gap-2.5 bg-white p-3 rounded-xl border border-slate-200/80 shadow-2xs">
+                      <CheckCircle2 className="w-4 h-4 text-[#059669] shrink-0 mt-0.5" />
                       <span className="font-medium text-slate-800">{app}</span>
                     </li>
                   ))}
                 </ul>
               </div>
 
-              <div className="pt-3 border-t border-slate-200/60 flex items-center justify-between text-[11px] text-slate-500">
+              <div className="pt-3 border-t border-slate-200/60 flex items-center justify-between text-xs text-slate-500">
                 <span>5 Categorias de Modelos</span>
                 {onNavigate && (
                   <button
                     onClick={() => onNavigate('exemplos-disciplina')}
-                    className="font-medium text-blue-600 hover:text-blue-800 inline-flex items-center gap-1"
+                    className="font-bold text-[#1E70EB] hover:text-blue-800 inline-flex items-center gap-1 cursor-pointer"
                   >
                     <span>Ver Prompts Reais</span>
-                    <ArrowRight className="w-3 h-3" />
+                    <ArrowRight className="w-3.5 h-3.5" />
                   </button>
                 )}
               </div>
