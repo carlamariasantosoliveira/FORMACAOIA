@@ -1,73 +1,64 @@
 import React from 'react';
-import { ArrowLeft, ArrowRight, Home } from 'lucide-react';
+import { ArrowLeft, ArrowRight } from 'lucide-react';
 import { PageId } from '../../types';
-import { PAGES_NAV } from '../../data/courseData';
 
 interface BottomNavProps {
   currentPage: PageId;
   onSelectPage: (pageId: PageId) => void;
 }
 
+const ORDERED_PAGES: PageId[] = [
+  'home',
+  'ia-generativa',
+  'como-funcionam',
+  'tipos-modelos',
+  'prompts',
+  'tecnicas',
+  'atividades-sala',
+  'magicschool',
+  'simuladores-quizzes',
+  'desafio-final',
+  'ferramentas-referencias',
+];
+
 export const BottomNav: React.FC<BottomNavProps> = ({
   currentPage,
   onSelectPage,
 }) => {
-  const currentIndex = PAGES_NAV.findIndex((p) => p.id === currentPage);
-  const prevPage = currentIndex > 0 ? PAGES_NAV[currentIndex - 1] : null;
-  const nextPage =
-    currentIndex < PAGES_NAV.length - 1 ? PAGES_NAV[currentIndex + 1] : null;
+  const currentIdx = ORDERED_PAGES.indexOf(currentPage);
+  const prevPage = currentIdx > 0 ? ORDERED_PAGES[currentIdx - 1] : null;
+  const nextPage = currentIdx < ORDERED_PAGES.length - 1 ? ORDERED_PAGES[currentIdx + 1] : null;
+
+  if (currentPage === 'home') {
+    return null;
+  }
 
   return (
-    <nav aria-label="Navegação entre páginas" className="mt-12 pt-6 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-4">
-      {/* Previous Button */}
+    <nav aria-label="Navegação entre páginas" className="pt-10 pb-4 flex items-center justify-between gap-4 font-sans border-t border-slate-200/60 mt-10">
+      {/* Anterior Button matching reference screenshots (imagem_6bc26744, imagem_49d88603, etc.) */}
       {prevPage ? (
         <button
-          onClick={() => onSelectPage(prevPage.id)}
-          className="w-full sm:w-auto inline-flex items-center justify-center gap-2 text-xs font-semibold text-slate-700 bg-white hover:bg-slate-50 border border-slate-200 hover:border-slate-300 px-5 py-3 rounded-xl shadow-2xs transition-all"
+          onClick={() => onSelectPage(prevPage)}
+          className="inline-flex items-center gap-2 bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 font-semibold text-xs sm:text-sm px-6 py-2.5 rounded-xl transition-all shadow-2xs cursor-pointer"
         >
-          <ArrowLeft className="w-4 h-4 text-slate-500" />
-          <div className="text-left">
-            <span className="block text-[10px] text-slate-400 font-normal uppercase">
-              Anterior
-            </span>
-            <span className="block text-xs font-semibold text-slate-800">
-              {prevPage.title}
-            </span>
-          </div>
+          <ArrowLeft className="w-4 h-4 text-slate-600" />
+          <span>Anterior</span>
         </button>
       ) : (
-        <div className="hidden sm:block"></div>
+        <div></div>
       )}
 
-      {/* Return to Home Quick Button */}
-      {currentPage !== 'home' && (
-        <button
-          onClick={() => onSelectPage('home')}
-          className="text-xs text-slate-500 hover:text-blue-700 flex items-center gap-1.5 py-2 px-3 rounded-lg hover:bg-slate-100 transition-colors"
-        >
-          <Home className="w-3.5 h-3.5" />
-          <span>Voltar à Página Inicial</span>
-        </button>
-      )}
-
-      {/* Next Button */}
+      {/* Seguinte Button matching reference screenshots */}
       {nextPage ? (
         <button
-          onClick={() => onSelectPage(nextPage.id)}
-          className="w-full sm:w-auto inline-flex items-center justify-center gap-2 text-xs font-semibold text-white bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-xl shadow-xs hover:shadow-md transition-all ml-auto"
+          onClick={() => onSelectPage(nextPage)}
+          className="inline-flex items-center gap-2 bg-[#1E70EB] hover:bg-blue-600 text-white font-semibold text-xs sm:text-sm px-7 py-2.5 rounded-xl shadow-xs transition-all cursor-pointer ml-auto"
         >
-          <div className="text-right">
-            <span className="block text-[10px] text-blue-200 font-normal uppercase">
-              Seguinte
-            </span>
-            <span className="block text-xs font-semibold text-white">
-              {nextPage.title}
-            </span>
-          </div>
+          <span>Seguinte</span>
           <ArrowRight className="w-4 h-4 text-white" />
         </button>
       ) : (
-        <div className="hidden sm:block"></div>
+        <div></div>
       )}
     </nav>
   );

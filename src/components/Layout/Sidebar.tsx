@@ -6,17 +6,16 @@ import {
   Layers,
   Terminal,
   PenTool,
-  BookOpen,
   FileCheck,
   Settings,
   Gamepad2,
-  Briefcase,
+  Award,
   FileText,
   Brain,
   X,
+  Sparkles,
 } from 'lucide-react';
 import { PageId } from '../../types';
-import { PAGES_NAV } from '../../data/courseData';
 
 interface SidebarProps {
   currentPage: PageId;
@@ -30,18 +29,17 @@ const MENU_ITEMS: Array<{
   label: string;
   icon: React.ElementType;
 }> = [
-  { id: 'home', label: 'Página Inicial', icon: Home },
-  { id: 'ia-generativa', label: '1. IA Generativa', icon: Home },
+  { id: 'home', label: 'Início', icon: Home },
+  { id: 'ia-generativa', label: '1. IA Generativa', icon: Cpu },
   { id: 'como-funcionam', label: '2. Como funcionam', icon: GitBranch },
   { id: 'tipos-modelos', label: '3. Tipos de modelos', icon: Layers },
   { id: 'prompts', label: '4. Prompts', icon: Terminal },
   { id: 'tecnicas', label: '5. Técnicas e exemplos', icon: PenTool },
-  { id: 'exemplos-disciplina', label: '6. Exemplos por disciplina', icon: BookOpen },
-  { id: 'atividades-sala', label: '7. Atividades práticas', icon: FileCheck },
-  { id: 'magicschool', label: '8. MagicSchool.ai', icon: Settings },
-  { id: 'simuladores-quizzes', label: '9. Quizzes e simuladores', icon: Gamepad2 },
-  { id: 'desafio-final', label: '10. Desafio final', icon: Briefcase },
-  { id: 'ferramentas-referencias', label: '11. Referências', icon: FileText },
+  { id: 'atividades-sala', label: '6. Atividades práticas', icon: FileCheck },
+  { id: 'magicschool', label: '7. MagicSchool.ai', icon: Settings },
+  { id: 'simuladores-quizzes', label: '8. Quizzes e simuladores', icon: Gamepad2 },
+  { id: 'desafio-final', label: '9. Desafio final', icon: Award },
+  { id: 'ferramentas-referencias', label: 'Referências', icon: FileText },
 ];
 
 export const Sidebar: React.FC<SidebarProps> = ({
@@ -50,58 +48,115 @@ export const Sidebar: React.FC<SidebarProps> = ({
   isMobileOpen,
   onCloseMobile,
 }) => {
+  const isHome = currentPage === 'home';
+
   return (
     <>
       {/* Mobile backdrop */}
       {isMobileOpen && (
         <div
-          className="fixed inset-0 z-40 bg-slate-900/40 backdrop-blur-xs lg:hidden"
+          className="fixed inset-0 z-40 bg-slate-900/60 backdrop-blur-xs lg:hidden"
           onClick={onCloseMobile}
         />
       )}
 
-      {/* Clean White Sidebar matching all reference screenshots */}
+      {/* 
+        Sidebar Styling:
+        - When on Home: Dark Navy `#0A1E38` matching Curso_de_IA_na_Educa__o__1__f7e93860.png and Dashboard_de_IA_na_Educa__o_4d994aa9.png
+        - When on Content Pages: Crisp White/Slate `#FFFFFF` / `#F8FAFC` matching imagem_ca72888b.png, imagem_6bc26744.png, imagem_aa589f90.png, imagem_49d88603.png
+      */}
       <aside
-        className={`fixed top-0 bottom-0 left-0 z-50 w-64 bg-white border-r border-slate-100 flex flex-col justify-between transition-transform duration-300 ease-in-out lg:translate-x-0 ${
+        className={`fixed top-0 bottom-0 left-0 z-50 w-64 flex flex-col justify-between transition-transform duration-300 ease-in-out lg:translate-x-0 ${
           isMobileOpen ? 'translate-x-0 shadow-2xl' : '-translate-x-full'
+        } ${
+          isHome
+            ? 'bg-[#0A1E38] text-white border-r border-[#162D4E]'
+            : 'bg-white text-slate-700 border-r border-slate-200/80 shadow-xs'
         }`}
       >
         {/* Brand Header */}
-        <div className="p-5 pb-3 flex items-center justify-between">
+        <div
+          className={`p-5 pb-4 flex items-center justify-between border-b ${
+            isHome ? 'border-white/10' : 'border-slate-100'
+          }`}
+        >
           <div
             onClick={() => {
               onSelectPage('home');
               onCloseMobile();
             }}
-            className="flex items-center gap-2.5 cursor-pointer group"
+            className="flex items-center gap-3 cursor-pointer group"
           >
-            <div className="w-8 h-8 rounded-full bg-blue-50 flex items-center justify-center text-blue-600 shrink-0 border border-blue-100">
-              <Brain className="w-5 h-5 text-blue-600" />
+            <div
+              className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 border ${
+                isHome
+                  ? 'border-white/20 bg-white/5 text-white'
+                  : 'border-blue-200 bg-blue-50 text-[#1E70EB]'
+              }`}
+            >
+              <Brain className="w-5 h-5" />
             </div>
             <div>
-              <span className="text-[13px] font-bold text-slate-900 leading-tight block">
-                Inteligência Artificial
+              <span
+                className={`text-[11px] font-extrabold tracking-wider uppercase block leading-tight ${
+                  isHome ? 'text-white' : 'text-[#0C1E38]'
+                }`}
+              >
+                INTELIGÊNCIA ARTIFICIAL
               </span>
-              <span className="text-[12px] font-semibold text-slate-700 leading-tight block">
-                na Educação
+              <span
+                className={`text-[11px] font-extrabold tracking-wider uppercase block leading-tight ${
+                  isHome ? 'text-white' : 'text-[#0C1E38]'
+                }`}
+              >
+                NA EDUCAÇÃO
               </span>
             </div>
           </div>
 
           <button
             onClick={onCloseMobile}
-            className="p-1 text-slate-400 hover:text-slate-600 lg:hidden rounded-lg hover:bg-slate-100"
+            className={`p-1 lg:hidden rounded-lg ${
+              isHome
+                ? 'text-slate-400 hover:text-white hover:bg-white/10'
+                : 'text-slate-500 hover:text-slate-900 hover:bg-slate-100'
+            }`}
             title="Fechar menu"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
-        {/* Navigation list */}
-        <div className="flex-1 overflow-y-auto px-3 py-2 space-y-1">
+        {/* Navigation list matching exact labels in reference screenshot */}
+        <div className="flex-1 overflow-y-auto px-3 py-3 space-y-1">
           {MENU_ITEMS.map((item) => {
             const Icon = item.icon;
             const isActive = currentPage === item.id;
+
+            let buttonClass = '';
+            let iconClass = '';
+
+            if (isHome) {
+              // Dark mode sidebar rules
+              if (isActive) {
+                buttonClass = 'bg-[#1E70EB] text-white font-semibold shadow-md';
+                iconClass = 'text-white';
+              } else {
+                buttonClass = 'text-slate-300 hover:text-white hover:bg-white/10';
+                iconClass = 'text-slate-400 group-hover:text-white';
+              }
+            } else {
+              // Light mode sidebar rules (matching imagem_ca72888b, etc.)
+              if (isActive) {
+                buttonClass =
+                  'bg-[#DCEBFE] text-[#1D4ED8] font-bold border border-blue-200/70 shadow-2xs';
+                iconClass = 'text-[#1D4ED8]';
+              } else {
+                buttonClass =
+                  'text-slate-600 hover:text-[#0C1E38] hover:bg-slate-50 font-medium';
+                iconClass = 'text-slate-500 group-hover:text-[#0C1E38]';
+              }
+            }
 
             return (
               <button
@@ -110,59 +165,34 @@ export const Sidebar: React.FC<SidebarProps> = ({
                   onSelectPage(item.id);
                   onCloseMobile();
                 }}
-                className={`w-full text-left flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs transition-all ${
-                  isActive
-                    ? item.id === 'home'
-                      ? 'bg-blue-600 text-white font-semibold shadow-xs'
-                      : 'bg-blue-100/80 text-blue-800 font-semibold shadow-2xs'
-                    : 'text-slate-600 hover:text-blue-700 hover:bg-blue-50/50 font-medium'
-                }`}
+                className={`w-full text-left flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs transition-all ${buttonClass}`}
               >
-                <Icon
-                  className={`w-4 h-4 shrink-0 ${
-                    isActive
-                      ? item.id === 'home'
-                        ? 'text-white'
-                        : 'text-blue-700'
-                      : 'text-slate-400 group-hover:text-blue-600'
-                  }`}
-                />
+                <Icon className={`w-4 h-4 shrink-0 ${iconClass}`} />
                 <span className="truncate">{item.label}</span>
               </button>
             );
           })}
         </div>
 
-        {/* Sidebar Footer with Dark Blue Decorative Quote Card */}
-        <div className="p-3">
-          <div className="relative rounded-2xl bg-linear-to-b from-[#0F274E] via-[#0B1E3E] to-[#08152B] p-4 text-white overflow-hidden shadow-sm">
-            {/* Background subtle radial glow */}
-            <div className="absolute top-0 right-0 w-24 h-24 bg-blue-500/20 rounded-full blur-xl pointer-events-none"></div>
-
-            <p className="text-[11px] text-blue-100/90 leading-relaxed italic mb-3 relative z-10">
-              &ldquo;A IA generativa é uma aliada poderosa para potenciar a criatividade, a inclusão e a qualidade da aprendizagem.&rdquo;
+        {/* Bottom Quote Box matching Curso_de_IA_na_Educa__o__1__f7e93860.png */}
+        <div
+          className={`p-4 border-t ${
+            isHome
+              ? 'border-white/10 bg-black/20 text-blue-100/90'
+              : 'border-slate-100 bg-slate-50 text-slate-600'
+          }`}
+        >
+          <div className="text-[11px] leading-relaxed italic space-y-1.5">
+            <span
+              className={`text-xl font-serif leading-none block ${
+                isHome ? 'text-blue-300' : 'text-[#1E70EB]'
+              }`}
+            >
+              “
+            </span>
+            <p>
+              A IA generativa é uma aliada poderosa para potenciar a criatividade, a inclusão e a qualidade da aprendizagem.
             </p>
-
-            {/* Glowing Face Silhouette with Brain SVG */}
-            <div className="flex justify-center pt-1 opacity-80">
-              <svg
-                className="w-10 h-10 text-blue-300"
-                viewBox="0 0 64 64"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="M20 54c0-4 3-8 8-8h8c5 0 8 4 8 8" />
-                <path d="M22 46V36c0-6 4-10 10-10s10 4 10 10v10" />
-                <circle cx="32" cy="22" r="10" strokeDasharray="3 3" />
-                <circle cx="32" cy="22" r="3" fill="currentColor" />
-                <line x1="32" y1="12" x2="32" y2="16" />
-                <line x1="42" y1="22" x2="38" y2="22" />
-                <line x1="22" y1="22" x2="26" y2="22" />
-              </svg>
-            </div>
           </div>
         </div>
       </aside>

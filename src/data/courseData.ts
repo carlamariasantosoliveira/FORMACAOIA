@@ -578,6 +578,20 @@ export const MAGICSCHOOL_DATA = {
 export const QUIZ_QUESTIONS: QuizQuestion[] = [
   {
     id: 1,
+    question: 'Qual é o principal objetivo de um prompt bem formulado?',
+    options: [
+      'Garantir que a IA dá sempre respostas verdadeiras.',
+      'Obter respostas mais claras, relevantes e adequadas ao contexto.',
+      'Fazer a IA memorizar informações.',
+      'Acelerar o processamento interno da IA.',
+    ],
+    correctAnswer: 1,
+    explanation:
+      'Um prompt bem formulado ajuda a obter respostas mais claras, relevantes e adequadas ao contexto.',
+    conceptCovered: 'Objetivo de um Prompt Bem Formulado',
+  },
+  {
+    id: 2,
     question: 'Qual é o fundamento tecnológico e lógico central da IA Generativa?',
     options: [
       'Bases de dados relacionais que memorizam e reproduzem respostas previamente guardadas.',

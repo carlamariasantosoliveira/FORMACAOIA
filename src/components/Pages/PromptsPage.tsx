@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import {
-  FileText,
   UserCheck,
   CheckCircle,
   AlertCircle,
@@ -29,7 +28,7 @@ export const PromptsPage: React.FC = () => {
     if (format.trim()) p += `Formato de saída: ${format.trim()}.`;
 
     if (!p.trim()) {
-      p = 'Age como professor do 9.º ano. Explica o que é um texto argumentativo para alunos de 13 anos em tópicos curtos. Não uses termos excessivamente técnicos. No final, revê o texto.';
+      p = 'Age como professor do 9.º ano. Explica o que é um texto argumentativo para alunos de 13 anos em tópicos curtos. Não uses termos excessivamente técnicos. Apresenta o resultado com exemplos do quotidiano em tabela.';
     }
     setGeneratedPrompt(p.trim());
   };
@@ -46,8 +45,8 @@ export const PromptsPage: React.FC = () => {
       {/* 1. O que é um Prompt? matching imagem_ca72888b.png */}
       <div className="space-y-3">
         <div className="flex items-center gap-3">
-          <span className="w-1.5 h-8 bg-[#2563EB] rounded-full inline-block"></span>
-          <h1 className="text-2xl sm:text-3xl font-extrabold text-[#0F274E] tracking-tight">
+          <span className="w-1.5 h-8 bg-[#1E70EB] rounded-full inline-block"></span>
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-[#0C1E38] tracking-tight">
             O que é um Prompt?
           </h1>
         </div>
@@ -66,7 +65,7 @@ export const PromptsPage: React.FC = () => {
         <div className="space-y-3.5 text-xs sm:text-sm">
           {/* Contexto */}
           <div className="flex items-center gap-3">
-            <div className="w-6 h-6 rounded-md bg-blue-600 text-white flex items-center justify-center shrink-0 text-xs font-bold">
+            <div className="w-6 h-6 rounded-md bg-[#2563EB] text-white flex items-center justify-center shrink-0 text-xs font-bold">
               <UserCheck className="w-3.5 h-3.5" />
             </div>
             <p className="text-slate-800">
@@ -76,7 +75,7 @@ export const PromptsPage: React.FC = () => {
 
           {/* Tarefa */}
           <div className="flex items-center gap-3">
-            <div className="w-6 h-6 rounded-md bg-emerald-600 text-white flex items-center justify-center shrink-0 text-xs font-bold">
+            <div className="w-6 h-6 rounded-md bg-[#10B981] text-white flex items-center justify-center shrink-0 text-xs font-bold">
               <CheckCircle className="w-3.5 h-3.5" />
             </div>
             <p className="text-slate-800">
@@ -86,7 +85,7 @@ export const PromptsPage: React.FC = () => {
 
           {/* Restrições */}
           <div className="flex items-center gap-3">
-            <div className="w-6 h-6 rounded-md bg-amber-500 text-white flex items-center justify-center shrink-0 text-xs font-bold">
+            <div className="w-6 h-6 rounded-md bg-[#F59E0B] text-white flex items-center justify-center shrink-0 text-xs font-bold">
               <AlertCircle className="w-3.5 h-3.5" />
             </div>
             <p className="text-slate-800">
@@ -96,7 +95,7 @@ export const PromptsPage: React.FC = () => {
 
           {/* Formato */}
           <div className="flex items-center gap-3">
-            <div className="w-6 h-6 rounded-md bg-rose-500 text-white flex items-center justify-center shrink-0 text-xs font-bold">
+            <div className="w-6 h-6 rounded-md bg-[#EF4444] text-white flex items-center justify-center shrink-0 text-xs font-bold">
               <Layout className="w-3.5 h-3.5" />
             </div>
             <p className="text-slate-800">
@@ -110,8 +109,8 @@ export const PromptsPage: React.FC = () => {
       <div className="space-y-4 pt-2">
         <div className="space-y-1">
           <div className="flex items-center gap-3">
-            <span className="w-1.5 h-8 bg-[#2563EB] rounded-full inline-block"></span>
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-[#0F274E] tracking-tight">
+            <span className="w-1.5 h-8 bg-[#1E70EB] rounded-full inline-block"></span>
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-[#0C1E38] tracking-tight">
               Construtor de Prompts (Simulador)
             </h2>
           </div>
@@ -198,7 +197,7 @@ export const PromptsPage: React.FC = () => {
               <div className="pt-2">
                 <button
                   onClick={handleGenerate}
-                  className="w-full py-3 px-6 rounded-xl bg-[#2563EB] hover:bg-blue-600 text-white font-bold text-xs sm:text-sm shadow-xs transition-colors"
+                  className="w-full py-3 px-6 rounded-xl bg-[#1E70EB] hover:bg-blue-600 text-white font-bold text-xs sm:text-sm shadow-xs transition-colors cursor-pointer"
                 >
                   Gerar Prompt
                 </button>
@@ -215,7 +214,7 @@ export const PromptsPage: React.FC = () => {
               {generatedPrompt && (
                 <button
                   onClick={handleCopy}
-                  className="inline-flex items-center gap-1.5 text-xs font-semibold text-blue-600 hover:text-blue-800"
+                  className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#1E70EB] hover:text-blue-800 cursor-pointer"
                 >
                   {copied ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Copy className="w-3.5 h-3.5" />}
                   <span>{copied ? 'Copiado!' : 'Copiar'}</span>

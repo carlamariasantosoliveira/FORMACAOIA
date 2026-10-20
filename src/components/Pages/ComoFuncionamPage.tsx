@@ -15,49 +15,49 @@ export const ComoFuncionamPage: React.FC = () => {
       circleBg: 'bg-[#10B981]',
       titleBg: 'bg-[#ECFDF5] text-[#047857]',
       title: 'Aprendizagem de Padrões (Fase de Treino)',
-      desc: 'Processo de aprendizagem a partir dos dados. O modelo identifica regularidades, aprende como os elementos se organizam, estabelece associações e ajusta probabilidades internas. Exemplo analógico: Aprender a cozinhar (dados = receitas; aprendizagem = perceber que o açúcar adoça ou o sal realça sabores sem memorizar todas as receitas).',
+      desc: 'Processo de aprendizagem a partir dos dados. O modelo identifica regularidades, aprende como os elementos se organizam, estabelece associações e ajusta probabilidades internas.',
     },
     {
       num: 3,
       circleBg: 'bg-[#F59E0B]',
       titleBg: 'bg-[#FFFBEB] text-[#B45309]',
       title: 'Prompt do Utilizador (Ponto de Partida)',
-      desc: 'O utilizador escreve uma pergunta, instrução ou descrição (ex.: "Cria um texto explicativo", "Gera uma imagem sobre..."). O prompt orienta o cálculo estatístico, mas não garante a verdade.',
+      desc: 'O utilizador escreve uma pergunta, instrução ou descrição. O prompt orienta o cálculo estatístico, mas não garante a verdade.',
     },
     {
       num: 4,
       circleBg: 'bg-[#8B5CF6]',
       titleBg: 'bg-[#F5F3FF] text-[#6D28D9]',
       title: 'Processamento Interno',
-      desc: 'Texto: Divisão em tokens, cálculo da próxima palavra mais provável e uso de mecanismos de "atenção ao contexto". Imagens: Interpretação da descrição textual, associação a padrões visuais aprendidos e construção progressiva da imagem (modelos de difusão).',
+      desc: 'Divisão em tokens, cálculo da próxima palavra mais provável e uso de mecanismos de atenção ao contexto.',
     },
     {
       num: 5,
       circleBg: 'bg-[#EF4444]',
       titleBg: 'bg-[#FEF2F2] text-[#B91C1C]',
       title: 'Produção da Resposta (Saída / Output)',
-      desc: 'Texto: Resposta coerente em linguagem natural (pode conter erros factuais). Imagem: Visual coerente com o pedido (não representa a "realidade", mas sim a plausibilidade).',
+      desc: 'Resposta coerente em linguagem natural (pode conter erros factuais).',
     },
     {
       num: 6,
-      circleBg: 'bg-[#EAB308]',
+      circleBg: 'bg-[#F59E0B]',
       titleBg: 'bg-[#FEFCE8] text-[#A16207]',
       title: 'Limitação Fundamental',
-      desc: 'Não compreende como um ser humano, não valida factos e não possui consciência. ■■ Resposta convincente ≠ Resposta correcta.',
+      desc: 'Não compreende como um ser humano, não valida factos e não possui consciência. Resposta convincente ≠ Resposta correcta.',
     },
   ];
 
   return (
     <div className="space-y-8 pb-12 font-sans">
-      {/* Title bar with signature blue vertical line */}
+      {/* Title bar with signature blue vertical line matching imagem_6bc26744.png */}
       <div className="space-y-1">
         <div className="flex items-center gap-3">
-          <span className="w-1.5 h-8 bg-[#2563EB] rounded-full inline-block"></span>
-          <h1 className="text-2xl sm:text-3xl font-extrabold text-[#0F274E] tracking-tight">
+          <span className="w-1.5 h-8 bg-[#1E70EB] rounded-full inline-block"></span>
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-[#0C1E38] tracking-tight">
             Como Funcionam os Modelos Generativos?
           </h1>
         </div>
-        <p className="text-sm font-bold text-slate-700 pl-4.5">
+        <p className="text-sm font-bold text-slate-800 pl-4.5">
           Ciclo de Funcionamento
         </p>
       </div>

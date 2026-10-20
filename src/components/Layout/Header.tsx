@@ -3,13 +3,11 @@ import {
   Menu,
   ChevronLeft,
   ChevronRight,
-  Sun,
   Brain,
   Search,
   ArrowRight,
 } from 'lucide-react';
 import { PageId } from '../../types';
-import { PAGES_NAV } from '../../data/courseData';
 
 interface HeaderProps {
   currentPage: PageId;
@@ -18,49 +16,79 @@ interface HeaderProps {
   onOpenSearch: () => void;
 }
 
+const PAGE_STEPS: Record<PageId, { num: number; title: string }> = {
+  home: { num: 0, title: 'Início' },
+  'ia-generativa': { num: 1, title: '1. IA Generativa e Modelos Generativos' },
+  'como-funcionam': { num: 2, title: '2. Como funcionam os modelos' },
+  'tipos-modelos': { num: 3, title: '3. Tipos de modelos e aplicações' },
+  prompts: { num: 4, title: '4. Prompts e Engenharia de Prompts' },
+  tecnicas: { num: 5, title: '5. Técnicas de formulação de prompts' },
+  'exemplos-disciplina': { num: 5, title: '5. Exemplos por disciplina' },
+  'atividades-sala': { num: 6, title: '6. Atividades práticas' },
+  magicschool: { num: 7, title: '7. MagicSchool.ai' },
+  'simuladores-quizzes': { num: 8, title: '8. Quizzes e Simuladores' },
+  'desafio-final': { num: 9, title: '9. Desafio final' },
+  'ferramentas-referencias': { num: 9, title: 'Referências e Bibliografia' },
+};
+
+const ORDERED_STEPS: PageId[] = [
+  'home',
+  'ia-generativa',
+  'como-funcionam',
+  'tipos-modelos',
+  'prompts',
+  'tecnicas',
+  'atividades-sala',
+  'magicschool',
+  'simuladores-quizzes',
+  'desafio-final',
+  'ferramentas-referencias',
+];
+
 export const Header: React.FC<HeaderProps> = ({
   currentPage,
   onSelectPage,
   onOpenMobileMenu,
   onOpenSearch,
 }) => {
-  const currentIndex = PAGES_NAV.findIndex((p) => p.id === currentPage);
-  const currentPageMeta = PAGES_NAV[currentIndex] || PAGES_NAV[0];
+  const currentIdx = ORDERED_STEPS.indexOf(currentPage);
+  const info = PAGE_STEPS[currentPage] || { num: 1, title: 'Módulo 2' };
+  const isHome = currentPage === 'home';
 
   const handlePrev = () => {
-    if (currentIndex > 0) {
-      onSelectPage(PAGES_NAV[currentIndex - 1].id);
+    if (currentIdx > 1) {
+      onSelectPage(ORDERED_STEPS[currentIdx - 1]);
+    } else if (currentIdx === 1) {
+      onSelectPage('home');
     }
   };
 
   const handleNext = () => {
-    if (currentIndex < PAGES_NAV.length - 1) {
-      onSelectPage(PAGES_NAV[currentIndex + 1].id);
+    if (currentIdx < ORDERED_STEPS.length - 1) {
+      onSelectPage(ORDERED_STEPS[currentIdx + 1]);
     }
   };
 
-  const isHome = currentPage === 'home';
-
   return (
-    <header className="sticky top-0 z-30 bg-white border-b border-slate-100 px-4 sm:px-8 py-3 flex items-center justify-between gap-4">
-      {/* Left side: Mobile button + Breadcrumb */}
+    <header className="sticky top-0 z-30 bg-[#0C1E38] text-white px-4 sm:px-8 py-3.5 flex items-center justify-between gap-4 border-b border-white/10 shadow-xs">
+      {/* Left side: Hamburger button + Breadcrumb matching reference screenshots */}
       <div className="flex items-center gap-3 min-w-0">
         <button
           onClick={onOpenMobileMenu}
-          className="p-1.5 text-slate-600 hover:text-slate-900 rounded-lg hover:bg-slate-100 lg:hidden"
+          className="p-1.5 text-slate-300 hover:text-white rounded-lg hover:bg-white/10 lg:hidden"
           title="Abrir menu"
         >
           <Menu className="w-5 h-5" />
         </button>
 
         <div className="flex items-center gap-2 text-xs sm:text-sm truncate">
-          <div className="w-6 h-6 rounded-md bg-blue-50 text-blue-600 flex items-center justify-center shrink-0">
-            <Brain className="w-4 h-4" />
+          <div className="w-7 h-7 rounded-full border border-white/20 flex items-center justify-center text-white shrink-0 bg-white/5">
+            <Brain className="w-4 h-4 text-white" />
           </div>
 
           <button
             onClick={() => onSelectPage('home')}
-            className="font-bold text-slate-900 hover:text-blue-600 transition-colors whitespace-nowrap"
+            className="font-bold text-white hover:text-blue-300 transition-colors whitespace-nowrap cursor-pointer"
           >
             Módulo 2
           </button>
@@ -68,65 +96,54 @@ export const Header: React.FC<HeaderProps> = ({
           {!isHome && (
             <>
               <span className="text-slate-400 font-bold">&gt;</span>
-              <span className="text-slate-800 font-bold truncate">
-                {currentPageMeta.title}
+              <span className="text-slate-100 font-bold truncate">
+                {info.title}
               </span>
             </>
           )}
         </div>
       </div>
 
-      {/* Right side: Header controls */}
-      <div className="flex items-center gap-2 sm:gap-4 shrink-0">
-        {/* Search button */}
+      {/* Right side: Step Counter & Arrow Navigation matching reference screenshots */}
+      <div className="flex items-center gap-3 shrink-0">
         <button
           onClick={onOpenSearch}
-          className="p-2 text-slate-400 hover:text-slate-700 hover:bg-slate-50 rounded-full transition-colors"
+          className="p-1.5 text-slate-300 hover:text-white hover:bg-white/10 rounded-lg transition-colors cursor-pointer"
           title="Pesquisar (Ctrl+K)"
         >
           <Search className="w-4 h-4" />
         </button>
 
-        {/* Sun / Theme icon */}
-        <button
-          className="p-2 text-slate-400 hover:text-slate-700 hover:bg-slate-50 rounded-full transition-colors"
-          title="Modo de Visualização"
-        >
-          <Sun className="w-4 h-4" />
-        </button>
-
         {isHome ? (
-          /* Módulo 2 Pill Button on Home */
           <button
             onClick={() => onSelectPage('ia-generativa')}
-            className="inline-flex items-center gap-1.5 bg-blue-100/80 hover:bg-blue-200 text-blue-700 font-semibold text-xs px-4 py-1.5 rounded-full transition-colors"
+            className="hidden sm:inline-flex items-center gap-1.5 bg-[#1E70EB] hover:bg-blue-600 text-white font-semibold text-xs px-3.5 py-1.5 rounded-full shadow-xs transition-colors cursor-pointer"
           >
-            <span>Módulo 2</span>
+            <span>Iniciar Módulo</span>
             <ArrowRight className="w-3.5 h-3.5" />
           </button>
         ) : (
-          /* Navigation Arrow & Step Counter matching content screenshots */
-          <div className="flex items-center gap-2 text-slate-700">
+          <div className="flex items-center gap-2 bg-white/5 border border-white/10 px-3 py-1 rounded-full text-slate-200">
             <button
               onClick={handlePrev}
-              disabled={currentIndex === 0}
-              className="p-1 text-slate-500 hover:text-slate-900 disabled:opacity-20 transition-colors"
+              disabled={currentIdx <= 1}
+              className="p-0.5 text-slate-300 hover:text-white disabled:opacity-20 transition-colors cursor-pointer"
               title="Anterior"
             >
-              <ChevronLeft className="w-5 h-5" />
+              <ChevronLeft className="w-4 h-4" />
             </button>
 
-            <span className="font-mono text-xs sm:text-sm font-semibold text-slate-800">
-              {currentIndex} / {PAGES_NAV.length - 1}
+            <span className="font-mono text-xs sm:text-sm font-bold text-white px-1">
+              {info.num} / 9
             </span>
 
             <button
               onClick={handleNext}
-              disabled={currentIndex === PAGES_NAV.length - 1}
-              className="p-1 text-slate-500 hover:text-slate-900 disabled:opacity-20 transition-colors"
+              disabled={currentIdx >= ORDERED_STEPS.length - 1}
+              className="p-0.5 text-slate-300 hover:text-white disabled:opacity-20 transition-colors cursor-pointer"
               title="Seguinte"
             >
-              <ChevronRight className="w-5 h-5" />
+              <ChevronRight className="w-4 h-4" />
             </button>
           </div>
         )}
