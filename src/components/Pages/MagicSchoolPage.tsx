@@ -35,7 +35,7 @@ export const MagicSchoolPage: React.FC = () => {
         <span className="w-1.5 h-8 bg-[#1E70EB] rounded-full inline-block"></span>
         <div>
           <h1 className="text-2xl sm:text-3xl font-extrabold text-[#0C1E38] tracking-tight">
-            6. Exploração da Ferramenta MagicSchool.ai
+            8. Exploração da Ferramenta MagicSchool.ai
           </h1>
           <p className="text-xs text-slate-500 font-medium mt-0.5">
             Raina (Assistente do Professor), Student Chatbots e os 8 Geradores Especializados (Páginas 7 e 8)
@@ -145,13 +145,16 @@ export const MagicSchoolPage: React.FC = () => {
             ))}
           </div>
 
-          <div className="bg-[#EFF6FF] border border-blue-100 rounded-2xl p-4 sm:p-5 space-y-1 text-xs text-[#1D4ED8]">
+          <div className="bg-[#EFF6FF] border border-blue-100 rounded-2xl p-4 sm:p-5 space-y-1.5 text-xs text-[#1D4ED8]">
             <strong className="font-bold flex items-center gap-2 text-sm text-[#1E70EB]">
               <ShieldCheck className="w-4 h-4" />
               <span>Destaque Ético para a Educação:</span>
             </strong>
             <p className="leading-relaxed text-slate-700 pt-1">
-              O chatbot &ldquo;IA - Questões Éticas&rdquo; foi programado exclusivamente com base no documento <em>&ldquo;Orientações Éticas para Educadores&rdquo;</em> (Comissão Europeia, 2022), abordando a ação humana, transparência, equidade e bem-estar, sem adicionar fontes externas não verificadas.
+              O chatbot &ldquo;IA - Questões Éticas&rdquo; foi programado exclusivamente com base no documento <em>&ldquo;Orientações Éticas para Educadores&rdquo;</em> (Comissão Europeia, 2022), abordando a ação humana, transparência, equidade e bem-estar, sem adicionar fontes externas.
+            </p>
+            <p className="text-[11px] text-slate-500 italic pt-1 border-t border-blue-200/50">
+              Nota didática: Esta restrição documental representa a especificação pedagógica do chatbot no guião do curso. No presente ambiente, serve como modelo de referência para configuração de assistentes fechados e seguros na escola.
             </p>
           </div>
         </div>

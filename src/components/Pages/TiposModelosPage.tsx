@@ -127,7 +127,7 @@ export const TiposModelosPage: React.FC<TiposModelosPageProps> = ({ onNavigate }
         <span className="w-1.5 h-8 bg-[#1E70EB] rounded-full inline-block"></span>
         <div>
           <h1 className="text-2xl sm:text-3xl font-extrabold text-[#0C1E38] tracking-tight">
-            2. Tipos de Modelos Generativos e Aplicações Educativas
+            3. Tipos de Modelos (Áudio, Vídeo, Multimodal) e Aplicações Educativas
           </h1>
           <p className="text-xs text-slate-500 font-medium mt-0.5">
             Texto (LLMs), Imagem, Áudio/Voz, Vídeo e Modelos Multimodais (Páginas 2 e 3)

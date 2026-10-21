@@ -1,198 +1,214 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
-  Sparkles,
-  ArrowRight,
   Sliders,
-  Terminal,
-  Brain,
+  Cpu,
   Layers,
-  FileText,
-  Loader2,
-  Check,
+  Terminal,
+  HelpCircle,
+  FileCheck,
+  ArrowRight,
+  Sparkles,
+  Info,
+  CheckCircle2,
+  ExternalLink,
 } from 'lucide-react';
-import { QuizInteractive } from '../Simulators/QuizInteractive';
-import { PromptLabSimulator } from '../Simulators/PromptLabSimulator';
-import { ModelMechanicsSimulator } from '../Simulators/ModelMechanicsSimulator';
-import { ImageDiffusionSimulator } from '../Simulators/ImageDiffusionSimulator';
-import { PedagogicalResourceCreator } from '../Simulators/PedagogicalResourceCreator';
+import { PageId } from '../../types';
 
-export const SimuladoresQuizzesPage: React.FC = () => {
-  // State for side-by-side comparison from imagem_aa589f90.png
-  const [vagueAnswer, setVagueAnswer] = useState<string | null>(null);
-  const [vagueLoading, setVagueLoading] = useState(false);
+interface SimuladoresQuizzesPageProps {
+  onNavigate: (pageId: PageId) => void;
+}
 
-  const [detailedAnswer, setDetailedAnswer] = useState<string | null>(null);
-  const [detailedLoading, setDetailedLoading] = useState(false);
-
-  const [expandedLab, setExpandedLab] = useState<string | null>(null);
-
-  const handleGenerateVague = () => {
-    setVagueLoading(true);
-    setTimeout(() => {
-      setVagueAnswer(
-        'A água é um recurso natural indispensável à vida. Uma aula sobre a água pode abordar as suas propriedades físicas, os três estados (líquido, sólido e gasoso), a importância para a hidratação dos seres vivos e a necessidade de poupança no dia a dia...'
-      );
-      setVagueLoading(false);
-    }, 400);
-  };
-
-  const handleGenerateDetailed = () => {
-    setDetailedLoading(true);
-    setTimeout(() => {
-      setDetailedAnswer(
-        '| Fase da Aula (50 min) | Objetivos Específicos | Atividades Pedagógicas | Avaliação Formativa |\n|---|---|---|---|\n| 1. Introdução (10 min) | Ativar conhecimentos prévios | Apresentação de vídeo curto sobre a chuva e debate | Questões orais diagnósticas |\n| 2. Exploração (25 min) | Identificar as 4 fases do ciclo | Construção de esquema gráfico em grupo com setas | Observação direta e apoio |\n| 3. Síntese (15 min) | Consolidar terminologia | Preenchimento de tabela e ficha com legenda do ciclo | Bilhete de saída (Exit Ticket) |'
-      );
-      setDetailedLoading(false);
-    }, 400);
-  };
+export const SimuladoresQuizzesPage: React.FC<SimuladoresQuizzesPageProps> = ({
+  onNavigate,
+}) => {
+  const simulatorCards = [
+    {
+      id: 'simulador-modelos' as PageId,
+      number: 1,
+      title: 'Simulador do Funcionamento dos Modelos Generativos',
+      badge: 'Simulação Didática',
+      badgeColor: 'bg-blue-50 text-blue-700 border-blue-200/60',
+      description:
+        'Exploração visual das 6 etapas do ciclo de funcionamento dos modelos generativos, cálculo probabilístico e fatiador interativo de tokens.',
+      highlights: [
+        'Ciclo completo de 6 fases com analogia pedagógica de culinária',
+        'Fatiamento interativo de texto em unidades semânticas (tokens)',
+        'Mecanismo de Atenção dos Transformers e advertência de limitação factual',
+      ],
+      icon: Cpu,
+      themeColor: '#1E70EB',
+      buttonText: 'Abrir Simulador de Modelos',
+    },
+    {
+      id: 'simulador-difusao' as PageId,
+      number: 2,
+      title: 'Simulador de Difusão e Geração de Imagens',
+      badge: 'Simulação Visual',
+      badgeColor: 'bg-purple-50 text-purple-700 border-purple-200/60',
+      description:
+        'Compreensão do processo de denoising progressivo (redução de ruído gaussiano guiada por texto) que constrói ilustrações educativas.',
+      highlights: [
+        'Animação de difusão de 0 a 5 etapas em tela gráfica interativa',
+        '3 temas curriculares prontos (Ciclo da Água, Célula Vegetal e Navegador)',
+        'Demonstração de que a IA não faz recortes, mas calcula probabilidades visuais',
+      ],
+      icon: Layers,
+      themeColor: '#7C3AED',
+      buttonText: 'Abrir Simulador de Difusão',
+    },
+    {
+      id: 'laboratorio-prompts' as PageId,
+      number: 3,
+      title: 'Laboratório de Engenharia e Comparação de Prompts',
+      badge: 'Bancada Interativa',
+      badgeColor: 'bg-amber-50 text-amber-800 border-amber-200/60',
+      description:
+        'Comparação direta entre formulações vagas e prompts refinados, e bancada para estruturar Contexto, Tarefa, Restrições e Formato.',
+      highlights: [
+        'Comparação lado a lado (Prompt Vago vs. Prompt Estruturado em Tabela)',
+        'Presets curriculares de Português, Matemática, História e Ciências',
+        'Testes com respostas simuladas ou ligação à API Gemini',
+      ],
+      icon: Terminal,
+      themeColor: '#D97706',
+      buttonText: 'Abrir Laboratório de Prompts',
+    },
+    {
+      id: 'quiz-interativo' as PageId,
+      number: 4,
+      title: 'Questionário Interativo de Avaliação Formativa',
+      badge: 'Avaliação com Feedback Imediato',
+      badgeColor: 'bg-emerald-50 text-emerald-800 border-emerald-200/60',
+      description:
+        '5 questões formativas selecionadas do programa oficial para autoavaliação com validação instantânea e fundamentação pedagógica.',
+      highlights: [
+        'Feedback formativo imediato sem penalização classificativa',
+        'Justificações didáticas aprofundadas para cada opção de resposta',
+        'Resumo de desempenho com cálculo de percentagem e reforço conceptual',
+      ],
+      icon: HelpCircle,
+      themeColor: '#059669',
+      buttonText: 'Abrir Questionário Formativo',
+    },
+    {
+      id: 'criador-recursos' as PageId,
+      number: 5,
+      title: 'Criador de Recursos Pedagógicos com IA',
+      badge: 'Ferramenta de Criação',
+      badgeColor: 'bg-indigo-50 text-indigo-700 border-indigo-200/60',
+      description:
+        'Assistente para estruturar planos de aula, quizzes curriculares com distratores justificados, fichas de 3 níveis e rubricas avaliativas.',
+      highlights: [
+        '4 geradores curriculares alinhados com Aprendizagens Essenciais',
+        'Personalização por ano de escolaridade e medidas de diferenciação',
+        'Exportação imediata do documento em formato Markdown estruturado',
+      ],
+      icon: FileCheck,
+      themeColor: '#4F46E5',
+      buttonText: 'Abrir Criador de Recursos',
+    },
+  ];
 
   return (
-    <div className="space-y-10 pb-12 font-sans">
-      {/* 1. Quiz: Teste os seus conhecimentos matching imagem_aa589f90.png */}
-      <QuizInteractive />
-
-      {/* 2. Simulador: Compare os resultados matching imagem_aa589f90.png */}
-      <div className="space-y-4">
-        <div className="space-y-1">
-          <div className="flex items-center gap-3">
-            <span className="w-1.5 h-8 bg-[#2563EB] rounded-full inline-block"></span>
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-[#0F274E] tracking-tight">
-              Simulador: Compare os resultados
-            </h2>
-          </div>
-          <p className="text-xs sm:text-sm text-slate-600 pl-4.5">
-            Veja a diferença entre um prompt vago e um prompt eficaz.
+    <div className="space-y-8 pb-12 font-sans">
+      {/* Title bar with signature blue vertical line */}
+      <div className="flex items-center gap-3">
+        <span className="w-1.5 h-8 bg-[#1E70EB] rounded-full inline-block"></span>
+        <div>
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-[#0C1E38] tracking-tight">
+            Laboratório de Simuladores e Questionários
+          </h1>
+          <p className="text-xs text-slate-500 font-medium mt-0.5">
+            Área Complementar Prática: 5 Ferramentas Independentes com Rotas Dedicadas
           </p>
-        </div>
-
-        {/* Two Columns Comparison matching imagem_aa589f90.png */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-          {/* Left: Prompt Vago (Pink/Light Red card) */}
-          <div className="bg-[#FEF2F2] border border-rose-100 rounded-3xl p-6 sm:p-7 flex flex-col justify-between space-y-4 shadow-2xs">
-            <div className="space-y-3">
-              <h3 className="text-base font-bold text-[#DC2626]">
-                Prompt vago
-              </h3>
-
-              <p className="text-xs sm:text-sm text-slate-800 italic font-medium leading-relaxed">
-                &ldquo;Cria um plano de aula sobre a água.&rdquo;
-              </p>
-
-              {vagueAnswer && (
-                <div className="mt-3 bg-white/90 p-4 rounded-2xl border border-rose-200/60 text-xs text-slate-700 leading-relaxed font-sans animate-in fade-in">
-                  <span className="font-bold text-rose-800 block mb-1">
-                    Resposta da IA (Genérica):
-                  </span>
-                  {vagueAnswer}
-                </div>
-              )}
-            </div>
-
-            <div className="pt-2">
-              <button
-                onClick={handleGenerateVague}
-                disabled={vagueLoading}
-                className="bg-[#2563EB] hover:bg-blue-600 text-white font-semibold text-xs sm:text-sm px-6 py-2.5 rounded-xl transition-colors shadow-2xs"
-              >
-                {vagueLoading ? 'A gerar...' : 'Gerar resposta'}
-              </button>
-            </div>
-          </div>
-
-          {/* Right: Prompt Detalhado (Light Green card) */}
-          <div className="bg-[#ECFDF5] border border-emerald-100 rounded-3xl p-6 sm:p-7 flex flex-col justify-between space-y-4 shadow-2xs">
-            <div className="space-y-3">
-              <h3 className="text-base font-bold text-[#059669]">
-                Prompt detalhado
-              </h3>
-
-              <p className="text-xs sm:text-sm text-slate-800 italic font-medium leading-relaxed">
-                &ldquo;Cria um plano de aula sobre o ciclo da água para alunos do 5º ano, com objetivos, atividades e a avaliação, em formato de tabela.&rdquo;
-              </p>
-
-              {detailedAnswer && (
-                <div className="mt-3 bg-white/90 p-4 rounded-2xl border border-emerald-200/60 text-xs text-slate-800 leading-relaxed font-mono whitespace-pre-wrap animate-in fade-in overflow-x-auto">
-                  <span className="font-bold text-emerald-800 font-sans block mb-1">
-                    Resposta da IA (Estruturada em Tabela):
-                  </span>
-                  {detailedAnswer}
-                </div>
-              )}
-            </div>
-
-            <div className="pt-2">
-              <button
-                onClick={handleGenerateDetailed}
-                disabled={detailedLoading}
-                className="bg-[#2563EB] hover:bg-blue-600 text-white font-semibold text-xs sm:text-sm px-6 py-2.5 rounded-xl transition-colors shadow-2xs"
-              >
-                {detailedLoading ? 'A gerar...' : 'Gerar resposta'}
-              </button>
-            </div>
-          </div>
         </div>
       </div>
 
-      {/* 3. Deep Educational Sandboxes (Prompt Lab, Model Mechanics, Diffusion, Resource Creator) */}
-      <div className="pt-6 border-t border-slate-100 space-y-6">
-        <div className="flex items-center justify-between">
-          <div>
-            <h3 className="text-lg font-bold text-slate-900">
-              Laboratórios Interativos Avançados
-            </h3>
-            <p className="text-xs text-slate-500">
-              Experimente os outros simuladores especializados do Módulo 2:
-            </p>
-          </div>
+      {/* Overview Banner */}
+      <div className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-100 shadow-2xs space-y-4">
+        <div className="flex items-center gap-2 text-xs font-bold text-[#1E70EB] uppercase tracking-wider">
+          <Sliders className="w-4 h-4" />
+          <span>Organização Arquitetural das Ferramentas Interativas</span>
         </div>
-
-        <div className="flex flex-wrap gap-2">
-          <button
-            onClick={() => setExpandedLab(expandedLab === 'lab' ? null : 'lab')}
-            className={`px-4 py-2 rounded-xl text-xs font-semibold transition-all ${
-              expandedLab === 'lab'
-                ? 'bg-blue-600 text-white shadow-2xs'
-                : 'bg-white border border-slate-200 text-slate-700 hover:bg-slate-50'
-            }`}
-          >
-            Laboratório de Engenharia de Prompts
-          </button>
-          <button
-            onClick={() => setExpandedLab(expandedLab === 'mechanics' ? null : 'mechanics')}
-            className={`px-4 py-2 rounded-xl text-xs font-semibold transition-all ${
-              expandedLab === 'mechanics'
-                ? 'bg-blue-600 text-white shadow-2xs'
-                : 'bg-white border border-slate-200 text-slate-700 hover:bg-slate-50'
-            }`}
-          >
-            Mecânica do Ciclo & Tokenizer
-          </button>
-          <button
-            onClick={() => setExpandedLab(expandedLab === 'diffusion' ? null : 'diffusion')}
-            className={`px-4 py-2 rounded-xl text-xs font-semibold transition-all ${
-              expandedLab === 'diffusion'
-                ? 'bg-blue-600 text-white shadow-2xs'
-                : 'bg-white border border-slate-200 text-slate-700 hover:bg-slate-50'
-            }`}
-          >
-            Difusão de Imagem Didática
-          </button>
-          <button
-            onClick={() => setExpandedLab(expandedLab === 'resources' ? null : 'resources')}
-            className={`px-4 py-2 rounded-xl text-xs font-semibold transition-all ${
-              expandedLab === 'resources'
-                ? 'bg-blue-600 text-white shadow-2xs'
-                : 'bg-white border border-slate-200 text-slate-700 hover:bg-slate-50'
-            }`}
-          >
-            Criador de Recursos Pedagógicos
-          </button>
+        <p className="text-xs sm:text-sm text-slate-700 leading-relaxed font-normal">
+          Cada simulador possui agora a sua própria página e rota independente, permitindo experimentação focada, navegação direta por URL e utilização fluida em computadores, tablets ou telemóveis.
+        </p>
+        <div className="flex flex-wrap items-center gap-2 pt-1">
+          <span className="text-[11px] text-slate-500">Selecione uma ferramenta abaixo para aceder à respetiva página individual:</span>
         </div>
+      </div>
 
-        {expandedLab === 'lab' && <PromptLabSimulator />}
-        {expandedLab === 'mechanics' && <ModelMechanicsSimulator />}
-        {expandedLab === 'diffusion' && <ImageDiffusionSimulator />}
-        {expandedLab === 'resources' && <PedagogicalResourceCreator />}
+      {/* Simulator Hub Cards Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {simulatorCards.map((sim) => {
+          const Icon = sim.icon;
+          return (
+            <div
+              key={sim.id}
+              className="bg-white rounded-3xl border border-slate-100 shadow-2xs hover:shadow-md transition-all flex flex-col justify-between overflow-hidden group"
+            >
+              <div className="p-6 sm:p-7 space-y-4">
+                {/* Header of Card */}
+                <div className="flex items-start justify-between gap-3">
+                  <div className="flex items-center gap-3">
+                    <div
+                      className="w-11 h-11 rounded-2xl flex items-center justify-center text-white shrink-0 shadow-2xs group-hover:scale-105 transition-transform"
+                      style={{ backgroundColor: sim.themeColor }}
+                    >
+                      <Icon className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider block">
+                        Ferramenta {sim.number}
+                      </span>
+                      <h2 className="text-base font-bold text-slate-900 group-hover:text-[#1E70EB] transition-colors leading-snug">
+                        {sim.title}
+                      </h2>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Badge */}
+                <div className="pt-1">
+                  <span
+                    className={`inline-block text-[11px] font-bold px-2.5 py-0.5 rounded-md border ${sim.badgeColor}`}
+                  >
+                    {sim.badge}
+                  </span>
+                </div>
+
+                {/* Description */}
+                <p className="text-xs text-slate-600 leading-relaxed">
+                  {sim.description}
+                </p>
+
+                {/* Key Features Bullets */}
+                <div className="space-y-1.5 pt-2 border-t border-slate-100">
+                  <span className="text-[11px] font-semibold text-slate-700 block">
+                    Aspetos Explorados:
+                  </span>
+                  {sim.highlights.map((h, i) => (
+                    <div key={i} className="flex items-start gap-2 text-[11px] text-slate-600">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0 mt-0.5" />
+                      <span>{h}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Bottom CTA Button */}
+              <div className="p-4 sm:p-6 pt-0 bg-slate-50/50 border-t border-slate-100/70">
+                <button
+                  onClick={() => onNavigate(sim.id)}
+                  className="w-full flex items-center justify-center gap-2 bg-[#1E70EB] hover:bg-blue-600 text-white font-semibold text-xs py-3 px-4 rounded-xl shadow-2xs transition-all transform hover:scale-[1.01] cursor-pointer"
+                >
+                  <span>{sim.buttonText}</span>
+                  <ArrowRight className="w-4 h-4" />
+                </button>
+              </div>
+            </div>
+          );
+        })}
       </div>
     </div>
   );

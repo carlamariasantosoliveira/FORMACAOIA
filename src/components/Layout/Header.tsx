@@ -16,21 +16,27 @@ interface HeaderProps {
   onOpenSearch: () => void;
 }
 
-const PAGE_STEPS: Record<PageId, { num: number; title: string }> = {
-  home: { num: 0, title: 'Início' },
-  'ia-generativa': { num: 1, title: '1. IA Generativa e Modelos Generativos' },
-  'como-funcionam': { num: 2, title: '2. Como funcionam os modelos' },
-  'tipos-modelos': { num: 3, title: '3. Tipos de modelos e aplicações' },
+const PAGE_STEPS: Record<PageId, { num: number; title: string; category?: string }> = {
+  home: { num: 0, title: 'Página Inicial' },
+  'ia-generativa': { num: 1, title: '1. Objetivos e Conceito de IA Generativa' },
+  'como-funcionam': { num: 2, title: '2. Funcionamento dos Modelos Generativos' },
+  'tipos-modelos': { num: 3, title: '3. Tipos de Modelos (Áudio, Vídeo, Multimodal)' },
   prompts: { num: 4, title: '4. Prompts e Engenharia de Prompts' },
-  tecnicas: { num: 5, title: '5. Técnicas de formulação de prompts' },
-  'exemplos-disciplina': { num: 5, title: '5. Exemplos por disciplina' },
-  'atividades-sala': { num: 6, title: '6. Atividades práticas' },
-  magicschool: { num: 7, title: '7. MagicSchool.ai' },
-  'simuladores-quizzes': { num: 8, title: '8. Quizzes e Simuladores' },
-  'desafio-final': { num: 9, title: '9. Desafio final' },
-  'ferramentas-referencias': { num: 9, title: 'Referências e Bibliografia' },
+  tecnicas: { num: 5, title: '5. Técnicas de Formulação de Prompts' },
+  'exemplos-disciplina': { num: 6, title: '6. Exemplos Práticos por Disciplina' },
+  'atividades-sala': { num: 7, title: '7. Atividades Práticas em Sala de Aula' },
+  magicschool: { num: 8, title: '8. Exploração da Ferramenta MagicSchool.ai' },
+  'desafio-final': { num: 8, title: 'Desafio Prático Final do Módulo 2', category: 'Desafio' },
+  'ferramentas-referencias': { num: 9, title: 'Referências Bibliográficas e Créditos', category: 'Referências' },
+  'simuladores-quizzes': { num: 0, title: 'Laboratório de Simuladores (Índice)', category: 'Simulador' },
+  'simulador-modelos': { num: 0, title: 'Simulador do Funcionamento dos Modelos', category: 'Simulador' },
+  'simulador-difusao': { num: 0, title: 'Simulador de Difusão e Imagem', category: 'Simulador' },
+  'laboratorio-prompts': { num: 0, title: 'Laboratório de Engenharia de Prompts', category: 'Simulador' },
+  'quiz-interativo': { num: 0, title: 'Questionário Interativo Formativo', category: 'Simulador' },
+  'criador-recursos': { num: 0, title: 'Criador de Recursos Pedagógicos', category: 'Simulador' },
 };
 
+// Main linear sequence for course browsing
 const ORDERED_STEPS: PageId[] = [
   'home',
   'ia-generativa',
@@ -38,9 +44,9 @@ const ORDERED_STEPS: PageId[] = [
   'tipos-modelos',
   'prompts',
   'tecnicas',
+  'exemplos-disciplina',
   'atividades-sala',
   'magicschool',
-  'simuladores-quizzes',
   'desafio-final',
   'ferramentas-referencias',
 ];
@@ -54,8 +60,20 @@ export const Header: React.FC<HeaderProps> = ({
   const currentIdx = ORDERED_STEPS.indexOf(currentPage);
   const info = PAGE_STEPS[currentPage] || { num: 1, title: 'Módulo 2' };
   const isHome = currentPage === 'home';
+  const isSimulatorSubpage = [
+    'simuladores-quizzes',
+    'simulador-modelos',
+    'simulador-difusao',
+    'laboratorio-prompts',
+    'quiz-interativo',
+    'criador-recursos',
+  ].includes(currentPage);
 
   const handlePrev = () => {
+    if (isSimulatorSubpage) {
+      onSelectPage('simuladores-quizzes');
+      return;
+    }
     if (currentIdx > 1) {
       onSelectPage(ORDERED_STEPS[currentIdx - 1]);
     } else if (currentIdx === 1) {
@@ -64,19 +82,23 @@ export const Header: React.FC<HeaderProps> = ({
   };
 
   const handleNext = () => {
-    if (currentIdx < ORDERED_STEPS.length - 1) {
+    if (isSimulatorSubpage) {
+      onSelectPage('desafio-final');
+      return;
+    }
+    if (currentIdx >= 0 && currentIdx < ORDERED_STEPS.length - 1) {
       onSelectPage(ORDERED_STEPS[currentIdx + 1]);
     }
   };
 
   return (
     <header className="sticky top-0 z-30 bg-[#0C1E38] text-white px-4 sm:px-8 py-3.5 flex items-center justify-between gap-4 border-b border-white/10 shadow-xs">
-      {/* Left side: Hamburger button + Breadcrumb matching reference screenshots */}
+      {/* Left side: Hamburger button + Breadcrumb */}
       <div className="flex items-center gap-3 min-w-0">
         <button
           onClick={onOpenMobileMenu}
-          className="p-1.5 text-slate-300 hover:text-white rounded-lg hover:bg-white/10 lg:hidden"
-          title="Abrir menu"
+          className="p-1.5 text-slate-300 hover:text-white rounded-lg hover:bg-white/10 lg:hidden cursor-pointer"
+          title="Abrir menu de navegação"
         >
           <Menu className="w-5 h-5" />
         </button>
@@ -104,12 +126,12 @@ export const Header: React.FC<HeaderProps> = ({
         </div>
       </div>
 
-      {/* Right side: Step Counter & Arrow Navigation matching reference screenshots */}
+      {/* Right side: Step Counter & Arrow Navigation */}
       <div className="flex items-center gap-3 shrink-0">
         <button
           onClick={onOpenSearch}
           className="p-1.5 text-slate-300 hover:text-white hover:bg-white/10 rounded-lg transition-colors cursor-pointer"
-          title="Pesquisar (Ctrl+K)"
+          title="Pesquisar conteúdos (Ctrl+K)"
         >
           <Search className="w-4 h-4" />
         </button>
@@ -122,6 +144,15 @@ export const Header: React.FC<HeaderProps> = ({
             <span>Iniciar Módulo</span>
             <ArrowRight className="w-3.5 h-3.5" />
           </button>
+        ) : isSimulatorSubpage ? (
+          <div className="flex items-center gap-2 bg-white/5 border border-white/10 px-3 py-1 rounded-full text-slate-200">
+            <button
+              onClick={() => onSelectPage('simuladores-quizzes')}
+              className="text-xs font-semibold text-blue-300 hover:text-white transition-colors cursor-pointer"
+            >
+              Laboratório
+            </button>
+          </div>
         ) : (
           <div className="flex items-center gap-2 bg-white/5 border border-white/10 px-3 py-1 rounded-full text-slate-200">
             <button
@@ -134,7 +165,7 @@ export const Header: React.FC<HeaderProps> = ({
             </button>
 
             <span className="font-mono text-xs sm:text-sm font-bold text-white px-1">
-              {info.num} / 9
+              {info.num > 0 ? `${info.num} / 8` : 'Anexo'}
             </span>
 
             <button

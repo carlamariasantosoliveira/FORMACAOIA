@@ -9,6 +9,7 @@ import {
   Sparkles,
   Info,
 } from 'lucide-react';
+import promptsPedagogyImg from '../../assets/images/prompts_pedagogy_1792545537603.jpg';
 
 export const PromptsPage: React.FC = () => {
   const [context, setContext] = useState('');
@@ -48,7 +49,7 @@ export const PromptsPage: React.FC = () => {
         <div className="flex items-center gap-3">
           <span className="w-1.5 h-8 bg-[#1E70EB] rounded-full inline-block"></span>
           <h1 className="text-2xl sm:text-3xl font-extrabold text-[#0C1E38] tracking-tight">
-            3. Prompts e Engenharia de Prompts
+            4. Prompts e Engenharia de Prompts
           </h1>
         </div>
 
@@ -57,58 +58,78 @@ export const PromptsPage: React.FC = () => {
         </p>
       </div>
 
-      {/* 2. Elementos Principais de um Prompt matching imagem_ca72888b.png */}
-      <div className="bg-[#EFF6FF] rounded-3xl p-6 sm:p-8 border border-blue-100 shadow-2xs space-y-4">
-        <h2 className="text-base sm:text-lg font-bold text-[#1D4ED8]">
-          Elementos Principais de um Prompt
-        </h2>
+      {/* 2. Elementos Principais de um Prompt with Pedagogical Visual */}
+      <div className="bg-[#EFF6FF] rounded-3xl p-6 sm:p-8 border border-blue-100 shadow-2xs space-y-6">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+          {/* Left: 4 Core Elements */}
+          <div className="lg:col-span-7 space-y-4">
+            <h2 className="text-base sm:text-lg font-bold text-[#1D4ED8]">
+              Elementos Principais de um Prompt
+            </h2>
 
-        <div className="space-y-3.5 text-xs sm:text-sm">
-          {/* Contexto */}
-          <div className="flex items-center gap-3">
-            <div className="w-6 h-6 rounded-md bg-[#2563EB] text-white flex items-center justify-center shrink-0 text-xs font-bold">
-              <UserCheck className="w-3.5 h-3.5" />
+            <div className="space-y-3.5 text-xs sm:text-sm">
+              {/* Contexto */}
+              <div className="flex items-center gap-3">
+                <div className="w-6 h-6 rounded-md bg-[#2563EB] text-white flex items-center justify-center shrink-0 text-xs font-bold shadow-xs">
+                  <UserCheck className="w-3.5 h-3.5" />
+                </div>
+                <p className="text-slate-800">
+                  <strong className="text-slate-900 font-bold">Contexto:</strong> Quem é a IA? (ex.: &ldquo;Age como um historiador&rdquo;).
+                </p>
+              </div>
+
+              {/* Tarefa */}
+              <div className="flex items-center gap-3">
+                <div className="w-6 h-6 rounded-md bg-[#10B981] text-white flex items-center justify-center shrink-0 text-xs font-bold shadow-xs">
+                  <CheckCircle className="w-3.5 h-3.5" />
+                </div>
+                <p className="text-slate-800">
+                  <strong className="text-slate-900 font-bold">Tarefa:</strong> O que deve fazer? (ex.: &ldquo;Resume este texto&rdquo;).
+                </p>
+              </div>
+
+              {/* Restrições */}
+              <div className="flex items-center gap-3">
+                <div className="w-6 h-6 rounded-md bg-[#F59E0B] text-white flex items-center justify-center shrink-0 text-xs font-bold shadow-xs">
+                  <AlertCircle className="w-3.5 h-3.5" />
+                </div>
+                <p className="text-slate-800">
+                  <strong className="text-slate-900 font-bold">Restrições:</strong> O que evitar? (ex.: &ldquo;Não uses termos técnicos&rdquo;).
+                </p>
+              </div>
+
+              {/* Formato */}
+              <div className="flex items-center gap-3">
+                <div className="w-6 h-6 rounded-md bg-[#EF4444] text-white flex items-center justify-center shrink-0 text-xs font-bold shadow-xs">
+                  <Layout className="w-3.5 h-3.5" />
+                </div>
+                <p className="text-slate-800">
+                  <strong className="text-slate-900 font-bold">Formato:</strong> Como apresentar a resposta? (ex.: &ldquo;Em tabela&rdquo;, &ldquo;Em tópicos&rdquo;).
+                </p>
+              </div>
             </div>
-            <p className="text-slate-800">
-              <strong className="text-slate-900 font-bold">Contexto:</strong> Quem é a IA? (ex.: &ldquo;Age como um historiador&rdquo;).
-            </p>
+
+            {/* Verbatim Note from Page 3 */}
+            <div className="pt-3 border-t border-blue-200/60 flex items-center gap-2 text-xs text-[#1D4ED8] font-semibold">
+              <Info className="w-4 h-4 shrink-0 text-[#1E70EB]" />
+              <span>Nota: A qualidade do prompt influencia significativamente a qualidade do resultado obtido.</span>
+            </div>
           </div>
 
-          {/* Tarefa */}
-          <div className="flex items-center gap-3">
-            <div className="w-6 h-6 rounded-md bg-[#10B981] text-white flex items-center justify-center shrink-0 text-xs font-bold">
-              <CheckCircle className="w-3.5 h-3.5" />
+          {/* Right: Interactive Pedagogical Visual */}
+          <div className="lg:col-span-5">
+            <div className="rounded-2xl overflow-hidden border border-blue-200/80 shadow-md bg-white">
+              <img
+                src={promptsPedagogyImg}
+                alt="Professora a construir planos de aula e prompts com apoio de IA"
+                className="w-full h-48 sm:h-52 object-cover object-center"
+              />
+              <div className="p-3 bg-white text-[11px] text-slate-600 border-t border-slate-100 flex items-center justify-between">
+                <span className="font-medium text-slate-800">Construção colaborativa de prompts pedagógicos</span>
+                <span className="text-[#1E70EB] font-semibold">Módulo 2</span>
+              </div>
             </div>
-            <p className="text-slate-800">
-              <strong className="text-slate-900 font-bold">Tarefa:</strong> O que deve fazer? (ex.: &ldquo;Resume este texto&rdquo;).
-            </p>
           </div>
-
-          {/* Restrições */}
-          <div className="flex items-center gap-3">
-            <div className="w-6 h-6 rounded-md bg-[#F59E0B] text-white flex items-center justify-center shrink-0 text-xs font-bold">
-              <AlertCircle className="w-3.5 h-3.5" />
-            </div>
-            <p className="text-slate-800">
-              <strong className="text-slate-900 font-bold">Restrições:</strong> O que evitar? (ex.: &ldquo;Não uses termos técnicos&rdquo;).
-            </p>
-          </div>
-
-          {/* Formato */}
-          <div className="flex items-center gap-3">
-            <div className="w-6 h-6 rounded-md bg-[#EF4444] text-white flex items-center justify-center shrink-0 text-xs font-bold">
-              <Layout className="w-3.5 h-3.5" />
-            </div>
-            <p className="text-slate-800">
-              <strong className="text-slate-900 font-bold">Formato:</strong> Como apresentar a resposta? (ex.: &ldquo;Em tabela&rdquo;, &ldquo;Em tópicos&rdquo;).
-            </p>
-          </div>
-        </div>
-
-        {/* Verbatim Note from Page 3 */}
-        <div className="pt-2 border-t border-blue-200/60 flex items-center gap-2 text-xs text-[#1D4ED8] font-semibold">
-          <Info className="w-4 h-4 shrink-0 text-[#1E70EB]" />
-          <span>Nota: A qualidade do prompt influencia significativamente a qualidade do resultado obtido.</span>
         </div>
       </div>
 

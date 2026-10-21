@@ -5,15 +5,17 @@
     <title>IA na Educação - A redirecionar...</title>
     <script>
       // Single Page Application redirect for GitHub Pages
-      // Redirects 404 paths to index.html with hash routing
-      const pathname = window.location.pathname;
-      const repoSegments = pathname.split('/').filter(Boolean);
-      // Determine if there is a repository subpath
-      const repoBase = repoSegments.length > 0 ? '/' + repoSegments[0] + '/' : '/';
-      window.location.replace(repoBase);
+      var path = window.location.pathname;
+      var segments = path.split('/').filter(Boolean);
+      // If repository subfolder exists (e.g. modulo2), keep it as base
+      var repoBase = segments.length > 0 ? '/' + segments[0] + '/' : '/';
+      var subPath = segments.length > 1 ? segments.slice(1).join('/') : '';
+      var query = window.location.search || '';
+      var hash = window.location.hash || (subPath ? '#' + subPath : '');
+      window.location.replace(repoBase + query + hash);
     </script>
   </head>
   <body>
-    <p>A redirecionar para a página principal...</p>
+    <p>A redirecionar...</p>
   </body>
 </html>

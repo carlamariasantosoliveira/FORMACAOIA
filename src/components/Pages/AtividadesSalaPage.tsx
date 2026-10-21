@@ -53,7 +53,7 @@ export const AtividadesSalaPage: React.FC = () => {
         <span className="w-1.5 h-8 bg-[#1E70EB] rounded-full inline-block"></span>
         <div>
           <h1 className="text-2xl sm:text-3xl font-extrabold text-[#0C1E38] tracking-tight">
-            5. Atividades Práticas em Sala de Aula com Ferramentas LLM
+            7. Atividades Práticas em Sala de Aula com Ferramentas LLM
           </h1>
           <p className="text-xs text-slate-500 font-medium mt-0.5">
             Guiões Didáticos, Objetivos Pedagógicos e Critérios de Avaliação (Páginas 6 e 7)

@@ -81,7 +81,7 @@ export const ComoFuncionamPage: React.FC = () => {
         <div className="flex items-center gap-3">
           <span className="w-1.5 h-8 bg-[#1E70EB] rounded-full inline-block"></span>
           <h1 className="text-2xl sm:text-3xl font-extrabold text-[#0C1E38] tracking-tight">
-            Como Funcionam os Modelos Generativos?
+            2. Funcionamento dos Modelos Generativos
           </h1>
         </div>
         <p className="text-sm font-bold text-slate-800 pl-4.5">

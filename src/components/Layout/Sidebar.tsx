@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Home,
   Cpu,
@@ -6,6 +6,7 @@ import {
   Layers,
   Terminal,
   PenTool,
+  BookOpen,
   FileCheck,
   Settings,
   Gamepad2,
@@ -13,7 +14,10 @@ import {
   FileText,
   Brain,
   X,
-  Sparkles,
+  ChevronDown,
+  ChevronRight,
+  Sliders,
+  HelpCircle,
 } from 'lucide-react';
 import { PageId } from '../../types';
 
@@ -24,22 +28,42 @@ interface SidebarProps {
   onCloseMobile: () => void;
 }
 
-const MENU_ITEMS: Array<{
+// 8 Official sections directly from the PDF
+const OFFICIAL_SECTIONS: Array<{
   id: PageId;
   label: string;
   icon: React.ElementType;
 }> = [
-  { id: 'home', label: 'Início', icon: Home },
   { id: 'ia-generativa', label: '1. IA Generativa', icon: Cpu },
   { id: 'como-funcionam', label: '2. Como funcionam', icon: GitBranch },
   { id: 'tipos-modelos', label: '3. Tipos de modelos', icon: Layers },
   { id: 'prompts', label: '4. Prompts', icon: Terminal },
-  { id: 'tecnicas', label: '5. Técnicas e exemplos', icon: PenTool },
-  { id: 'atividades-sala', label: '6. Atividades práticas', icon: FileCheck },
-  { id: 'magicschool', label: '7. MagicSchool.ai', icon: Settings },
-  { id: 'simuladores-quizzes', label: '8. Quizzes e simuladores', icon: Gamepad2 },
-  { id: 'desafio-final', label: '9. Desafio final', icon: Award },
-  { id: 'ferramentas-referencias', label: 'Referências', icon: FileText },
+  { id: 'tecnicas', label: '5. Técnicas de prompts', icon: PenTool },
+  { id: 'exemplos-disciplina', label: '6. Exemplos disciplinares', icon: BookOpen },
+  { id: 'atividades-sala', label: '7. Atividades em aula', icon: FileCheck },
+  { id: 'magicschool', label: '8. MagicSchool.ai', icon: Settings },
+];
+
+const SYNTHESIS_SECTIONS: Array<{
+  id: PageId;
+  label: string;
+  icon: React.ElementType;
+}> = [
+  { id: 'desafio-final', label: 'Desafio Final & Portfólio', icon: Award },
+  { id: 'ferramentas-referencias', label: 'Referências & Créditos', icon: FileText },
+];
+
+const SIMULATOR_SECTIONS: Array<{
+  id: PageId;
+  label: string;
+  icon: React.ElementType;
+}> = [
+  { id: 'simuladores-quizzes', label: 'Índice de Simuladores', icon: Sliders },
+  { id: 'simulador-modelos', label: '1. Simulador de Modelos', icon: Cpu },
+  { id: 'simulador-difusao', label: '2. Difusão de Imagem', icon: Layers },
+  { id: 'laboratorio-prompts', label: '3. Laboratório de Prompts', icon: Terminal },
+  { id: 'quiz-interativo', label: '4. Questionário Formativo', icon: HelpCircle },
+  { id: 'criador-recursos', label: '5. Criador de Recursos', icon: FileCheck },
 ];
 
 export const Sidebar: React.FC<SidebarProps> = ({
@@ -49,6 +73,61 @@ export const Sidebar: React.FC<SidebarProps> = ({
   onCloseMobile,
 }) => {
   const isHome = currentPage === 'home';
+  const isSimulatorActive = [
+    'simuladores-quizzes',
+    'simulador-modelos',
+    'simulador-difusao',
+    'laboratorio-prompts',
+    'quiz-interativo',
+    'criador-recursos',
+  ].includes(currentPage);
+
+  const [simulatorsExpanded, setSimulatorsExpanded] = useState(true);
+
+  const renderNavButton = (
+    id: PageId,
+    label: string,
+    Icon: React.ElementType,
+    isSubItem = false
+  ) => {
+    const isActive = currentPage === id;
+    let buttonClass = '';
+    let iconClass = '';
+
+    if (isHome) {
+      if (isActive) {
+        buttonClass = 'bg-[#1E70EB] text-white font-semibold shadow-md';
+        iconClass = 'text-white';
+      } else {
+        buttonClass = 'text-slate-300 hover:text-white hover:bg-white/10';
+        iconClass = 'text-slate-400 group-hover:text-white';
+      }
+    } else {
+      if (isActive) {
+        buttonClass = 'bg-[#DCEBFE] text-[#1D4ED8] font-bold border border-blue-200/70 shadow-2xs';
+        iconClass = 'text-[#1D4ED8]';
+      } else {
+        buttonClass = 'text-slate-600 hover:text-[#0C1E38] hover:bg-slate-50 font-medium';
+        iconClass = 'text-slate-500 group-hover:text-[#0C1E38]';
+      }
+    }
+
+    return (
+      <button
+        key={id}
+        onClick={() => {
+          onSelectPage(id);
+          onCloseMobile();
+        }}
+        className={`w-full text-left flex items-center gap-2.5 rounded-xl transition-all cursor-pointer ${
+          isSubItem ? 'pl-7 py-2 text-[11px]' : 'px-3 py-2 text-xs'
+        } ${buttonClass}`}
+      >
+        <Icon className={`shrink-0 ${isSubItem ? 'w-3.5 h-3.5' : 'w-4 h-4'} ${iconClass}`} />
+        <span className="truncate">{label}</span>
+      </button>
+    );
+  };
 
   return (
     <>
@@ -60,13 +139,8 @@ export const Sidebar: React.FC<SidebarProps> = ({
         />
       )}
 
-      {/* 
-        Sidebar Styling:
-        - When on Home: Dark Navy `#0A1E38` matching Curso_de_IA_na_Educa__o__1__f7e93860.png and Dashboard_de_IA_na_Educa__o_4d994aa9.png
-        - When on Content Pages: Crisp White/Slate `#FFFFFF` / `#F8FAFC` matching imagem_ca72888b.png, imagem_6bc26744.png, imagem_aa589f90.png, imagem_49d88603.png
-      */}
       <aside
-        className={`fixed top-0 bottom-0 left-0 z-50 w-64 flex flex-col justify-between transition-transform duration-300 ease-in-out lg:translate-x-0 ${
+        className={`fixed top-0 bottom-0 left-0 z-50 w-72 flex flex-col justify-between transition-transform duration-300 ease-in-out lg:translate-x-0 ${
           isMobileOpen ? 'translate-x-0 shadow-2xl' : '-translate-x-full'
         } ${
           isHome
@@ -116,7 +190,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
           <button
             onClick={onCloseMobile}
-            className={`p-1 lg:hidden rounded-lg ${
+            className={`p-1 lg:hidden rounded-lg cursor-pointer ${
               isHome
                 ? 'text-slate-400 hover:text-white hover:bg-white/10'
                 : 'text-slate-500 hover:text-slate-900 hover:bg-slate-100'
@@ -127,54 +201,66 @@ export const Sidebar: React.FC<SidebarProps> = ({
           </button>
         </div>
 
-        {/* Navigation list matching exact labels in reference screenshot */}
-        <div className="flex-1 overflow-y-auto px-3 py-3 space-y-1">
-          {MENU_ITEMS.map((item) => {
-            const Icon = item.icon;
-            const isActive = currentPage === item.id;
+        {/* Navigation list */}
+        <div className="flex-1 overflow-y-auto px-3 py-3 space-y-4">
+          {/* Home Link */}
+          <div>
+            {renderNavButton('home', 'Página Inicial', Home)}
+          </div>
 
-            let buttonClass = '';
-            let iconClass = '';
+          {/* Group 1: Conteúdo Oficial do Módulo 2 (Secções 1 a 8) */}
+          <div className="space-y-1">
+            <div className="px-3 py-1 flex items-center justify-between">
+              <span className={`text-[10px] font-bold uppercase tracking-wider ${
+                isHome ? 'text-blue-300' : 'text-slate-400'
+              }`}>
+                Conteúdo Oficial (Secções 1 a 8)
+              </span>
+            </div>
+            {OFFICIAL_SECTIONS.map((sec) => renderNavButton(sec.id, sec.label, sec.icon))}
+          </div>
 
-            if (isHome) {
-              // Dark mode sidebar rules
-              if (isActive) {
-                buttonClass = 'bg-[#1E70EB] text-white font-semibold shadow-md';
-                iconClass = 'text-white';
-              } else {
-                buttonClass = 'text-slate-300 hover:text-white hover:bg-white/10';
-                iconClass = 'text-slate-400 group-hover:text-white';
-              }
-            } else {
-              // Light mode sidebar rules (matching imagem_ca72888b, etc.)
-              if (isActive) {
-                buttonClass =
-                  'bg-[#DCEBFE] text-[#1D4ED8] font-bold border border-blue-200/70 shadow-2xs';
-                iconClass = 'text-[#1D4ED8]';
-              } else {
-                buttonClass =
-                  'text-slate-600 hover:text-[#0C1E38] hover:bg-slate-50 font-medium';
-                iconClass = 'text-slate-500 group-hover:text-[#0C1E38]';
-              }
-            }
+          {/* Group 2: Desafio e Referências do PDF */}
+          <div className="space-y-1 pt-1 border-t border-slate-200/50">
+            <div className="px-3 py-1">
+              <span className={`text-[10px] font-bold uppercase tracking-wider ${
+                isHome ? 'text-blue-300' : 'text-slate-400'
+              }`}>
+                Avaliação & Consulta (PDF)
+              </span>
+            </div>
+            {SYNTHESIS_SECTIONS.map((sec) => renderNavButton(sec.id, sec.label, sec.icon))}
+          </div>
 
-            return (
+          {/* Group 3: Laboratório de Simuladores (Áreas Complementares) */}
+          <div className="space-y-1 pt-1 border-t border-slate-200/50">
+            <div className="px-3 py-1 flex items-center justify-between">
               <button
-                key={item.id}
-                onClick={() => {
-                  onSelectPage(item.id);
-                  onCloseMobile();
-                }}
-                className={`w-full text-left flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs transition-all ${buttonClass}`}
+                onClick={() => setSimulatorsExpanded(!simulatorsExpanded)}
+                className={`flex items-center justify-between w-full text-left text-[10px] font-bold uppercase tracking-wider cursor-pointer ${
+                  isSimulatorActive ? 'text-[#1E70EB]' : isHome ? 'text-blue-300' : 'text-slate-400'
+                }`}
               >
-                <Icon className={`w-4 h-4 shrink-0 ${iconClass}`} />
-                <span className="truncate">{item.label}</span>
+                <span>Simuladores (Prática)</span>
+                {simulatorsExpanded ? (
+                  <ChevronDown className="w-3.5 h-3.5" />
+                ) : (
+                  <ChevronRight className="w-3.5 h-3.5" />
+                )}
               </button>
-            );
-          })}
+            </div>
+
+            {simulatorsExpanded && (
+              <div className="space-y-0.5">
+                {SIMULATOR_SECTIONS.map((sim, idx) =>
+                  renderNavButton(sim.id, sim.label, sim.icon, idx > 0)
+                )}
+              </div>
+            )}
+          </div>
         </div>
 
-        {/* Bottom Quote Box matching Curso_de_IA_na_Educa__o__1__f7e93860.png */}
+        {/* Bottom Quote Box */}
         <div
           className={`p-4 border-t ${
             isHome
@@ -182,7 +268,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
               : 'border-slate-100 bg-slate-50 text-slate-600'
           }`}
         >
-          <div className="text-[11px] leading-relaxed italic space-y-1.5">
+          <div className="text-[11px] leading-relaxed italic space-y-1">
             <span
               className={`text-xl font-serif leading-none block ${
                 isHome ? 'text-blue-300' : 'text-[#1E70EB]'

@@ -12,6 +12,7 @@ import {
   GraduationCap,
 } from 'lucide-react';
 import { COURSE_INFO } from '../../data/courseData';
+import robotLightbulbImg from '../../assets/images/ai_robot_lightbulb_1792545516837.jpg';
 
 export const IAGenerativaPage: React.FC = () => {
   const [isObjectivesOpen, setIsObjectivesOpen] = useState(true);
@@ -22,7 +23,7 @@ export const IAGenerativaPage: React.FC = () => {
       <div className="flex items-center gap-3">
         <span className="w-1.5 h-8 bg-[#1E70EB] rounded-full inline-block"></span>
         <h1 className="text-2xl sm:text-3xl font-extrabold text-[#0C1E38] tracking-tight">
-          1. IA Generativa e Modelos Generativos
+          1. Objetivos e Conceito de IA Generativa
         </h1>
       </div>
 
@@ -75,30 +76,21 @@ export const IAGenerativaPage: React.FC = () => {
             </div>
           </div>
 
-          {/* Right Column: Clean SVG Educational AI Robot Illustration (Vector UI, NO Raw Mockup Screenshot) */}
+          {/* Right Column: High-fidelity Educational Robot visual matching Curso_de_IA_na_Educa__o__1__f7e93860.png */}
           <div className="lg:col-span-5 flex justify-center">
-            <div className="w-full max-w-sm rounded-2xl bg-linear-to-b from-[#0F274E] to-[#0A1C36] p-6 text-white shadow-md border border-slate-200/20 flex flex-col items-center justify-center text-center space-y-4 min-h-[250px] relative overflow-hidden">
-              {/* Background Ambient Glow */}
-              <div className="absolute -top-10 -right-10 w-36 h-36 bg-amber-400/20 rounded-full blur-2xl pointer-events-none"></div>
-              <div className="absolute -bottom-10 -left-10 w-36 h-36 bg-blue-500/20 rounded-full blur-2xl pointer-events-none"></div>
-
-              {/* Robot with Lightbulb Graphic */}
-              <div className="relative">
-                <div className="w-20 h-20 rounded-3xl bg-white/10 border border-white/20 flex items-center justify-center shadow-lg">
-                  <Bot className="w-12 h-12 text-blue-300" />
-                </div>
-                <div className="absolute -top-3 -right-3 w-10 h-10 rounded-full bg-amber-400 text-slate-950 flex items-center justify-center shadow-lg animate-pulse">
-                  <Lightbulb className="w-6 h-6 text-slate-950" />
-                </div>
-              </div>
-
-              <div className="space-y-1 relative z-10">
-                <span className="text-xs font-bold text-blue-200 uppercase tracking-wider block">
-                  Inteligência Artificial na Educação
+            <div className="w-full max-w-sm rounded-2xl overflow-hidden shadow-md border border-slate-200/80 bg-slate-50 relative group">
+              <img
+                src={robotLightbulbImg}
+                alt="Robot educativo de IA com lâmpada e livros"
+                className="w-full h-64 object-cover object-center group-hover:scale-102 transition-transform duration-500"
+              />
+              <div className="p-3 bg-linear-to-t from-slate-900/80 via-slate-900/40 to-transparent absolute bottom-0 inset-x-0 text-white">
+                <span className="text-[11px] font-semibold text-blue-200 block">
+                  Inteligência Artificial na Prática Docente
                 </span>
-                <p className="text-[11px] text-blue-100/80 leading-relaxed max-w-xs">
-                  Apoio à diferenciação curricular, personalização pedagógica e criação de materiais interativos.
-                </p>
+                <span className="text-[10px] text-slate-200 block">
+                  Potenciar a diferenciação e personalização da aprendizagem
+                </span>
               </div>
             </div>
           </div>

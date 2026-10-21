@@ -31,7 +31,7 @@ export const TecnicasPage: React.FC<TecnicasPageProps> = ({ onNavigate }) => {
         <span className="w-1.5 h-8 bg-[#1E70EB] rounded-full inline-block"></span>
         <div>
           <h1 className="text-2xl sm:text-3xl font-extrabold text-[#0C1E38] tracking-tight">
-            Técnicas e Estratégias de Formulação de Prompts
+            5. Técnicas de Formulação de Prompts
           </h1>
           <p className="text-xs text-slate-500 font-medium mt-0.5">
             As Oito Estratégias Pedagógicas e Comparação Integral Vago vs. Otimizado (Páginas 4 e 5)

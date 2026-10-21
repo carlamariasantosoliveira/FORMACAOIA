@@ -9,6 +9,11 @@ export type PageId =
   | 'atividades-sala'
   | 'magicschool'
   | 'simuladores-quizzes'
+  | 'simulador-modelos'
+  | 'simulador-difusao'
+  | 'laboratorio-prompts'
+  | 'quiz-interativo'
+  | 'criador-recursos'
   | 'desafio-final'
   | 'ferramentas-referencias';
 

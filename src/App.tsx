@@ -16,6 +16,11 @@ import { ExemplosDisciplinaPage } from './components/Pages/ExemplosDisciplinaPag
 import { AtividadesSalaPage } from './components/Pages/AtividadesSalaPage';
 import { MagicSchoolPage } from './components/Pages/MagicSchoolPage';
 import { SimuladoresQuizzesPage } from './components/Pages/SimuladoresQuizzesPage';
+import { SimuladorModelosPage } from './components/Pages/SimuladorModelosPage';
+import { SimuladorDifusaoPage } from './components/Pages/SimuladorDifusaoPage';
+import { LaboratorioPromptsPage } from './components/Pages/LaboratorioPromptsPage';
+import { QuizInterativoPage } from './components/Pages/QuizInterativoPage';
+import { CriadorRecursosPage } from './components/Pages/CriadorRecursosPage';
 import { DesafioFinalPage } from './components/Pages/DesafioFinalPage';
 import { ReferenciasPage } from './components/Pages/ReferenciasPage';
 
@@ -30,6 +35,11 @@ const VALID_PAGES: PageId[] = [
   'atividades-sala',
   'magicschool',
   'simuladores-quizzes',
+  'simulador-modelos',
+  'simulador-difusao',
+  'laboratorio-prompts',
+  'quiz-interativo',
+  'criador-recursos',
   'desafio-final',
   'ferramentas-referencias',
 ];
@@ -105,7 +115,17 @@ export default function App() {
       case 'magicschool':
         return <MagicSchoolPage />;
       case 'simuladores-quizzes':
-        return <SimuladoresQuizzesPage />;
+        return <SimuladoresQuizzesPage onNavigate={handleSelectPage} />;
+      case 'simulador-modelos':
+        return <SimuladorModelosPage onNavigate={handleSelectPage} />;
+      case 'simulador-difusao':
+        return <SimuladorDifusaoPage onNavigate={handleSelectPage} />;
+      case 'laboratorio-prompts':
+        return <LaboratorioPromptsPage onNavigate={handleSelectPage} />;
+      case 'quiz-interativo':
+        return <QuizInterativoPage onNavigate={handleSelectPage} />;
+      case 'criador-recursos':
+        return <CriadorRecursosPage onNavigate={handleSelectPage} />;
       case 'desafio-final':
         return <DesafioFinalPage />;
       case 'ferramentas-referencias':
