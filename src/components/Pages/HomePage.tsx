@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   BookOpen,
   Settings,
@@ -6,8 +6,11 @@ import {
   Users,
   ArrowRight,
   Sparkles,
+  ChevronUp,
+  ChevronDown,
 } from 'lucide-react';
 import { PageId } from '../../types';
+import { COURSE_INFO } from '../../data/courseData';
 import heroEducatorImg from '../../assets/images/hero_educator_ai_1792545498139.jpg';
 
 interface HomePageProps {
@@ -15,6 +18,8 @@ interface HomePageProps {
 }
 
 export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
+  const [isObjectivesOpen, setIsObjectivesOpen] = useState(true);
+
   return (
     <div className="space-y-8 pb-12 font-sans">
       {/* 1. Hero Banner matching exact visual style in Curso_de_IA_na_Educa__o__1__f7e93860.png */}
@@ -66,7 +71,40 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
         </div>
       </div>
 
-      {/* 2. Four Pillar Cards matching Curso_de_IA_na_Educa__o__1__f7e93860.png */}
+      {/* 2. Objetivos do Módulo 2 matching image_8962f579.png */}
+      <div className="bg-[#EFF6FF] rounded-3xl p-6 sm:p-7 border border-[#DBEAFE] shadow-2xs transition-all">
+        <button
+          onClick={() => setIsObjectivesOpen(!isObjectivesOpen)}
+          className="w-full flex items-center justify-between text-left cursor-pointer"
+        >
+          <div className="flex items-center gap-3.5">
+            <div className="w-10 h-10 rounded-full bg-[#DBEAFE] flex items-center justify-center text-[#1E70EB] shrink-0">
+              <Target className="w-5 h-5 text-[#1E70EB]" />
+            </div>
+            <h2 className="text-lg sm:text-xl font-bold text-[#1E70EB]">
+              Objetivos do Módulo 2
+            </h2>
+          </div>
+          {isObjectivesOpen ? (
+            <ChevronUp className="w-5 h-5 text-[#1E70EB]" />
+          ) : (
+            <ChevronDown className="w-5 h-5 text-[#1E70EB]" />
+          )}
+        </button>
+
+        {isObjectivesOpen && (
+          <div className="pt-4 sm:pt-5 pl-13 sm:pl-14 space-y-3 text-sm sm:text-base text-slate-800 animate-in fade-in">
+            {COURSE_INFO.objectives.map((obj, i) => (
+              <div key={i} className="flex items-start gap-3">
+                <span className="w-1.5 h-1.5 rounded-full bg-slate-900 mt-2.5 shrink-0"></span>
+                <span className="leading-relaxed font-normal">{obj}</span>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+
+      {/* 3. Four Pillar Cards matching Curso_de_IA_na_Educa__o__1__f7e93860.png */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {/* Card 1: Conteúdo completo */}
         <div

@@ -1,12 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
-  ChevronUp,
-  ChevronDown,
-  Target,
-  Bot,
-  Lightbulb,
-  BookOpen,
-  Info,
   Calendar,
   User,
   GraduationCap,
@@ -15,8 +8,6 @@ import { COURSE_INFO } from '../../data/courseData';
 import robotLightbulbImg from '../../assets/images/ai_robot_lightbulb_1792545516837.jpg';
 
 export const IAGenerativaPage: React.FC = () => {
-  const [isObjectivesOpen, setIsObjectivesOpen] = useState(true);
-
   return (
     <div className="space-y-8 pb-12 font-sans">
       {/* Title bar with signature blue vertical accent line matching reference screenshots (imagem_49d88603.png) */}
@@ -95,40 +86,8 @@ export const IAGenerativaPage: React.FC = () => {
             </div>
           </div>
         </div>
-
-        {/* Collapsible Card: Objetivos do Módulo 2 matching imagem_49d88603.png */}
-        <div className="bg-[#EFF6FF] rounded-2xl p-5 border border-blue-100 transition-all">
-          <button
-            onClick={() => setIsObjectivesOpen(!isObjectivesOpen)}
-            className="w-full flex items-center justify-between text-left cursor-pointer"
-          >
-            <div className="flex items-center gap-3">
-              <div className="w-9 h-9 rounded-full bg-blue-100 flex items-center justify-center text-[#1E70EB] shrink-0">
-                <Target className="w-5 h-5 text-[#1E70EB]" />
-              </div>
-              <h3 className="text-base sm:text-lg font-bold text-[#1E70EB]">
-                Objetivos do Módulo 2
-              </h3>
-            </div>
-            {isObjectivesOpen ? (
-              <ChevronUp className="w-5 h-5 text-[#1E70EB]" />
-            ) : (
-              <ChevronDown className="w-5 h-5 text-[#1E70EB]" />
-            )}
-          </button>
-
-          {isObjectivesOpen && (
-            <div className="pt-4 pl-12 space-y-2.5 text-xs sm:text-sm text-slate-700 animate-in fade-in">
-              {COURSE_INFO.objectives.map((obj, i) => (
-                <div key={i} className="flex items-start gap-2.5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-slate-800 mt-2 shrink-0"></span>
-                  <span className="leading-relaxed">{obj}</span>
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
       </div>
     </div>
   );
 };
+
